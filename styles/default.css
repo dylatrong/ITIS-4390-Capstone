@@ -1,0 +1,84 @@
+:root {
+  /* Typography */
+  --font-heading: "Italiana", Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* Content colors */
+  --color-text-primary: #0c0c0c;
+  --color-text-secondary: #323232;
+
+  /* Background + surface */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f8f8;
+  --color-surface: #ffffff;
+
+  /* Borders */
+  --color-border-primary: #656565;
+  --color-border-subtle: #dddddd;
+
+  /* Brand */
+  --color-brand-primary: #f06543;
+  --color-brand-primary-hover: #d95739;
+  --color-brand-primary-pressed: #c24e33;
+
+  --color-brand-secondary: #587b7f;
+  --color-brand-secondary-hover: #4c6a6d;
+  --color-brand-secondary-pressed: #425d60;
+
+  /* Feedback states (soft/pastel) */
+  --color-success: #67c587;
+  --color-success-hover: #58b377;
+  --color-success-pressed: #4a9a66;
+
+  --color-warning: #f4b266;
+  --color-warning-hover: #df9e57;
+  --color-warning-pressed: #c48845;
+
+  --color-error: #e88989;
+  --color-error-hover: #d17676;
+  --color-error-pressed: #b96363;
+
+  --color-info: var(--color-brand-secondary);
+  --color-info-hover: var(--color-brand-secondary-hover);
+  --color-info-pressed: var(--color-brand-secondary-pressed);
+
+  /* Focus + disabled states */
+  --color-focus-ring: #8aaeb2;
+  --color-disabled-bg: #f0f0f0;
+  --color-disabled-text: #8b8b8b;
+  --color-disabled-border: #c9c9c9;
+
+  /* Shadows for elevated surfaces (cards, modals, dropdowns) */
+  --shadow-sm: 0 1px 2px rgba(12, 12, 12, 0.08);
+  --shadow-md: 0 6px 16px rgba(12, 12, 12, 0.12);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: var(--color-brand-secondary);
+}
+
+a:hover {
+  color: var(--color-brand-secondary-hover);
+}
