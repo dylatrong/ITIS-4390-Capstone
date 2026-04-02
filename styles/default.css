@@ -384,7 +384,7 @@ footer {
   background-color: var(--nav-icon-hover-color);
 }
 
-/* Account drawer: fixed to right, below navbar (slides in like mobile nav) */
+/* Account drawer */
 .account-menu-backdrop {
   position: fixed;
   top: var(--account-menu-top-offset);
@@ -685,7 +685,7 @@ footer {
   }
 }
 
-/* Site footer (Figma 242:2210 — desktop-first, responsive) */
+/* Site footer */
 .site-footer {
   padding-block: 0;
  margin-block-start: auto;
