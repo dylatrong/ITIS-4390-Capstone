@@ -6,6 +6,7 @@
   /* Content colors */
   --color-text-primary: #0c0c0c;
   --color-text-secondary: #323232;
+  --color-text-tertiary: #6a6a6a;
 
   /* Background + surface */
   --color-bg-primary: #ffffff;
@@ -24,6 +25,8 @@
   --color-brand-secondary: #587b7f;
   --color-brand-secondary-hover: #4c6a6d;
   --color-brand-secondary-pressed: #425d60;
+  --color-brand-secondary-light: #7a9ea2;
+  --color-brand-secondary-dark: #3d5f63; /* deeper teal — contrast on coral */
 
   /* Feedback states (soft/pastel) */
   --color-success: #67c587;
@@ -76,10 +79,13 @@
   --nav-link-gap-desktop: 5.625rem; /* 90px */
   --nav-bar-padding-inline-desktop: var(--space-6);
   --nav-bar-padding-inline-mobile: var(--space-3);
+  /* Nav icons (mask) */
+  --nav-icon-color: var(--color-text-primary);
+  --nav-icon-hover-color: var(--color-brand-secondary);
 
-  /* Footer (Figma: Footer Desktop 242:2210) */
+  /* Footer */
   --footer-bg: var(--color-brand-primary);
-  --footer-text-inverse: #ffffff;
+  --footer-text-inverse: var(--color-bg-primary);
   --footer-min-height: 12.375rem; /* ~198px */
   --footer-padding-block: var(--space-4);
   --footer-padding-inline: var(--nav-bar-padding-inline-desktop);
@@ -89,6 +95,12 @@
   --footer-link-line-height: 1.75rem; /* 28px */
   --footer-copyright-size: 1rem; /* 16px */
   --footer-copyright-line-height: 1.5rem; /* 24px */
+  /* Footer text links on coral */
+  --footer-nav-link-hover: var(--color-brand-secondary-dark);
+  --footer-nav-link-active: var(--color-brand-secondary-pressed);
+  /* Footer social icons (mask) */
+  --footer-icon-color: var(--footer-text-inverse);
+  --footer-icon-hover-color: var(--color-brand-secondary-dark);
 }
 
 html,
@@ -239,7 +251,20 @@ footer {
   display: block;
   width: 2rem;
   height: 2rem;
-  object-fit: contain;
+  flex-shrink: 0;
+  background-color: var(--nav-icon-color);
+  mask-image: url("../images/hamburger_icon.svg");
+  -webkit-mask-image: url("../images/hamburger_icon.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
+.nav-toggle:hover .nav-toggle-icon {
+  background-color: var(--nav-icon-hover-color);
 }
 
 .nav-brand {
@@ -301,7 +326,7 @@ footer {
   width: 2rem;
   height: 2rem;
   text-decoration: none;
-  color: var(--color-text-primary);
+  color: inherit;
 }
 
 .nav-account:focus-visible {
@@ -313,7 +338,20 @@ footer {
   display: block;
   width: 2rem;
   height: 2rem;
-  object-fit: contain;
+  flex-shrink: 0;
+  background-color: var(--nav-icon-color);
+  mask-image: url("../images/account_icon.svg");
+  -webkit-mask-image: url("../images/account_icon.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
+.nav-account:hover .nav-account-icon {
+  background-color: var(--nav-icon-hover-color);
 }
 
 /* Mobile: hamburger + drawer */
@@ -449,11 +487,15 @@ footer {
   color: var(--footer-text-inverse);
   text-decoration: none;
   margin: 0;
+  transition: color 0.2s ease;
 }
 
 .footer-nav-link:hover {
-  color: var(--footer-text-inverse);
-  opacity: 0.92;
+  color: var(--footer-nav-link-hover);
+}
+
+.footer-nav-link:active {
+  color: var(--footer-nav-link-active);
 }
 
 .footer-nav-link:focus-visible {
@@ -485,18 +527,51 @@ footer {
   width: 2rem;
   height: 2rem;
   text-decoration: none;
-  color: var(--footer-text-inverse);
+  color: inherit;
 }
 
-.footer-social-link img {
+/* Icons via mask */
+.footer-social-icon {
   display: block;
   width: 2rem;
   height: 2rem;
-  object-fit: contain;
+  flex-shrink: 0;
+  background-color: var(--footer-icon-color);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }
 
-.footer-social-link:hover {
-  opacity: 0.88;
+.footer-social-icon--email {
+  mask-image: url("../images/email_icon.svg");
+  -webkit-mask-image: url("../images/email_icon.svg");
+}
+
+.footer-social-icon--facebook {
+  mask-image: url("../images/facebook_icon.svg");
+  -webkit-mask-image: url("../images/facebook_icon.svg");
+}
+
+.footer-social-icon--linkedin {
+  mask-image: url("../images/linkedin_icon.svg");
+  -webkit-mask-image: url("../images/linkedin_icon.svg");
+}
+
+.footer-social-icon--instagram {
+  mask-image: url("../images/insta_icon.svg");
+  -webkit-mask-image: url("../images/insta_icon.svg");
+}
+
+.footer-social-icon--twitter {
+  mask-image: url("../images/twitter_icon.svg");
+  -webkit-mask-image: url("../images/twitter_icon.svg");
+}
+
+.footer-social-link:hover .footer-social-icon {
+  background-color: var(--footer-icon-hover-color);
 }
 
 .footer-social-link:focus-visible {
