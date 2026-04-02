@@ -17,7 +17,8 @@ function setupSiteHeader() {
     toggle.setAttribute("aria-label", "Close navigation menu");
   }
 
-  toggle.addEventListener("click", function () {
+  toggle.addEventListener("click", function (ev) {
+    ev.stopPropagation();
     if (nav.classList.contains("is-open")) {
       closeMenu();
     } else {
@@ -45,7 +46,97 @@ function setupSiteHeader() {
   });
 }
 
+function setupAccountMenu() {
+  var wrap = document.querySelector(".nav-account-wrap");
+  if (!wrap || wrap.dataset.accountMenuInit === "true") return;
+
+  var trigger = wrap.querySelector(".nav-account");
+  var panel = document.getElementById("account-menu");
+  var backdrop = document.querySelector(".account-menu-backdrop");
+  var closeBtn = panel ? panel.querySelector(".account-menu-close") : null;
+  if (!trigger || !panel || !closeBtn || !backdrop) return;
+
+  wrap.dataset.accountMenuInit = "true";
+
+  function closeAccount() {
+    panel.classList.remove("is-open");
+    backdrop.classList.remove("is-open");
+    panel.setAttribute("aria-hidden", "true");
+    backdrop.setAttribute("aria-hidden", "true");
+    trigger.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("account-drawer-open");
+  }
+
+  function openAccount() {
+    panel.classList.add("is-open");
+    backdrop.classList.add("is-open");
+    panel.setAttribute("aria-hidden", "false");
+    backdrop.setAttribute("aria-hidden", "false");
+    trigger.setAttribute("aria-expanded", "true");
+    document.body.classList.add("account-drawer-open");
+  }
+
+  function isOpen() {
+    return panel.classList.contains("is-open");
+  }
+
+  trigger.addEventListener("click", function (ev) {
+    ev.stopPropagation();
+    if (isOpen()) {
+      closeAccount();
+    } else {
+      openAccount();
+    }
+  });
+
+  closeBtn.addEventListener("click", function (ev) {
+    ev.stopPropagation();
+    closeAccount();
+    trigger.focus();
+  });
+
+  backdrop.addEventListener("click", function () {
+    closeAccount();
+    trigger.focus();
+  });
+
+  panel.querySelectorAll(".account-menu-item").forEach(function (link) {
+    link.addEventListener("click", function () {
+      closeAccount();
+    });
+  });
+
+  document.addEventListener("click", function (ev) {
+    if (
+      isOpen() &&
+      !wrap.contains(ev.target) &&
+      !panel.contains(ev.target)
+    ) {
+      closeAccount();
+    }
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && isOpen()) {
+      closeAccount();
+      trigger.focus();
+    }
+  });
+
+  var toggleDark = panel.querySelector(".account-menu-toggle");
+  if (toggleDark) {
+    toggleDark.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      var on = toggleDark.getAttribute("aria-checked") === "true";
+      toggleDark.setAttribute("aria-checked", on ? "false" : "true");
+      toggleDark.classList.toggle("is-on", !on);
+    });
+  }
+}
+
 function tryInitHeader() {
+  setupAccountMenu();
+
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");
   if (!nav || !toggle) return false;
