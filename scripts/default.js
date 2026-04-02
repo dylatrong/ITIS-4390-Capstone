@@ -122,18 +122,6 @@ function setupAccountMenu() {
       trigger.focus();
     }
   });
-
-  var toggleDark = panel.querySelector(".account-menu-toggle");
-  if (toggleDark) {
-    toggleDark.addEventListener("click", function (ev) {
-      ev.stopPropagation();
-      var on = toggleDark.getAttribute("aria-checked") === "true";
-      toggleDark.setAttribute("aria-checked", on ? "false" : "true");
-      toggleDark.classList.toggle("is-on", !on);
-      var darkNow = toggleDark.getAttribute("aria-checked") === "true";
-      document.documentElement.setAttribute("data-theme", darkNow ? "dark" : "light");
-    });
-  }
 }
 
 function tryInitHeader() {
