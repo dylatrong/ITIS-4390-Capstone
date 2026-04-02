@@ -130,6 +130,8 @@ function setupAccountMenu() {
       var on = toggleDark.getAttribute("aria-checked") === "true";
       toggleDark.setAttribute("aria-checked", on ? "false" : "true");
       toggleDark.classList.toggle("is-on", !on);
+      var darkNow = toggleDark.getAttribute("aria-checked") === "true";
+      document.documentElement.setAttribute("data-theme", darkNow ? "dark" : "light");
     });
   }
 }

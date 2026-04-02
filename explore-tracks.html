@@ -1,19 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<Head> 
-      <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NewLeaf - Explore Track intermediate</title>
-  <link rel="stylesheet" href="styles.css" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/default.css">
+  <title>NewLeaf — Explore Tracks</title>
+</head>
 <body>
-    Body 
+  <div data-include="components/header.html"></div>
+
+  <main class="page-explore">
+    <div class="explore-inner">
+      <header class="explore-hero">
+        <h1 class="explore-title">Explore Tracks</h1>
+        <p class="explore-intro">
+          Tracks are designed to help you develop your well-being skills for
+          specific life situations. Each track has four parts that guide you
+          through fun, science-based activities designed by experts.
+        </p>
+
+        <div
+          class="explore-search explore-search--closed"
+          role="search"
+          aria-label="Search tracks"
+        >
+          <div class="explore-search-field">
+            <span class="explore-search-icon" aria-hidden="true"></span>
+            <label class="sr-only" for="explore-search-input">Search for tracks</label>
+            <input
+              id="explore-search-input"
+              class="explore-search-input"
+              type="search"
+              name="q"
+              placeholder="Search for Tracks..."
+              autocomplete="off"
+            >
+          </div>
+        </div>
+      </header>
+
+      <section class="explore-categories" aria-labelledby="explore-categories-heading">
+        <h2 id="explore-categories-heading" class="explore-section-title">Categories</h2>
+        <div class="explore-category-grid">
+          <a class="explore-category-card" href="#">
+            <div class="explore-category-card-media">
+              <img src="images/relationship.png" alt="" width="707" height="284" decoding="async">
+            </div>
+            <div class="explore-category-card-info">
+              <h3 class="explore-category-card-title">Relationships</h3>
+              <p class="explore-category-card-meta">11 Tracks</p>
+            </div>
+          </a>
+          <a class="explore-category-card" href="#">
+            <div class="explore-category-card-media">
+              <img src="images/mindfulness.png" alt="" width="707" height="284" decoding="async">
+            </div>
+            <div class="explore-category-card-info">
+              <h3 class="explore-category-card-title">Mindfulness &amp; Meditation</h3>
+              <p class="explore-category-card-meta">16 Tracks</p>
+            </div>
+          </a>
+          <a class="explore-category-card" href="#">
+            <div class="explore-category-card-media">
+              <img src="images/personal.png" alt="" width="707" height="284" decoding="async">
+            </div>
+            <div class="explore-category-card-info">
+              <h3 class="explore-category-card-title">Personal Growth</h3>
+              <p class="explore-category-card-meta">27 Tracks</p>
+            </div>
+          </a>
+          <a class="explore-category-card" href="#">
+            <div class="explore-category-card-media">
+              <img src="images/family.png" alt="" width="707" height="284" decoding="async">
+            </div>
+            <div class="explore-category-card-info">
+              <h3 class="explore-category-card-title">Family &amp; Kids</h3>
+              <p class="explore-category-card-meta">11 Tracks</p>
+            </div>
+          </a>
+          <a class="explore-category-card" href="#">
+            <div class="explore-category-card-media">
+              <img src="images/health.png" alt="" width="707" height="284" decoding="async">
+            </div>
+            <div class="explore-category-card-info">
+              <h3 class="explore-category-card-title">Health &amp; Well-Being</h3>
+              <p class="explore-category-card-meta">33 Tracks</p>
+            </div>
+          </a>
+          <a class="explore-category-card" href="#">
+            <div class="explore-category-card-media">
+              <img src="images/work.png" alt="" width="707" height="284" decoding="async">
+            </div>
+            <div class="explore-category-card-info">
+              <h3 class="explore-category-card-title">Work &amp; Money</h3>
+              <p class="explore-category-card-meta">25 Tracks</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="scripts/default.js"></script>
 </body>
-
-
-</Head>
-
-
-
-
-
 </html>
