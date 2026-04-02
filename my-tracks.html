@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/default.css">
+  <title>NewLeaf — My Tracks</title>
+</head>
+<body>
+  <div data-include="components/header.html"></div>
+
+  <main class="page-my-tracks">
+    <div class="my-tracks-inner">
+      <h1 class="my-tracks-page-title">My Tracks</h1>
+
+      <details class="my-track-card" open>
+        <summary class="my-track-summary">
+          <div class="my-track-summary-thumb">
+            <img src="images/work-burnout.png" alt="" width="234" height="128" decoding="async">
+          </div>
+          <div class="my-track-summary-text">
+            <span class="my-track-summary-title">Find Balance After Work Burnout</span>
+            <span class="my-track-summary-meta">12 Activities Left</span>
+          </div>
+          <span class="my-track-summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="my-track-panel">
+          <section class="my-track-part my-track-part--first" aria-labelledby="my-track-part-1">
+            <h2 id="my-track-part-1" class="my-track-part-title">Part 1: Recover Through Rest</h2>
+            <p class="my-track-part-desc">
+              In Part 1, you&rsquo;ll calm your nervous system by focusing on getting deep, restorative rest.
+            </p>
+            <div class="my-track-activity-rail">
+              <div class="my-track-activity-scroll" tabindex="0" role="region" aria-label="Activities in this part">
+                <div class="my-track-activity-cards">
+                <a class="my-track-activity-card my-track-activity-card--current" href="#">
+                  <div class="my-track-activity-card-media">
+                    <img src="images/disconnect.png" alt="" width="282" height="208" decoding="async">
+                  </div>
+                  <div class="my-track-activity-card-footer">
+                    <span class="my-track-activity-card-title">Disconnect and Reflect</span>
+                    <span class="my-track-activity-card-meta">Wind Down</span>
+                    <span class="my-track-activity-card-chevron" aria-hidden="true"></span>
+                  </div>
+                </a>
+                <div class="my-track-activity-card my-track-activity-card--locked">
+                  <div class="my-track-activity-card-media">
+                    <img src="images/inhale.png" alt="" width="282" height="208" decoding="async">
+                    <div class="my-track-activity-card-scrim" aria-hidden="true"></div>
+                  </div>
+                  <div class="my-track-activity-card-footer">
+                    <span class="my-track-activity-card-title">Inhale, Count, Exhale</span>
+                    <span class="my-track-activity-card-meta">Complete Previous Activity</span>
+                  </div>
+                </div>
+                <div class="my-track-activity-card my-track-activity-card--locked">
+                  <div class="my-track-activity-card-media">
+                    <img src="images/positive-thinking.png" alt="" width="282" height="208" decoding="async">
+                    <div class="my-track-activity-card-scrim" aria-hidden="true"></div>
+                  </div>
+                  <div class="my-track-activity-card-footer">
+                    <span class="my-track-activity-card-title">Power of Positivity</span>
+                    <span class="my-track-activity-card-meta">Complete Previous Activity</span>
+                  </div>
+                </div>
+                <div class="my-track-activity-card my-track-activity-card--locked">
+                  <div class="my-track-activity-card-media">
+                    <img src="images/sleep.png" alt="" width="282" height="208" decoding="async">
+                    <div class="my-track-activity-card-scrim" aria-hidden="true"></div>
+                  </div>
+                  <div class="my-track-activity-card-footer">
+                    <span class="my-track-activity-card-title">Power of Sleep</span>
+                    <span class="my-track-activity-card-meta">Complete Previous Activity</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="my-track-part my-track-part--split" aria-labelledby="my-track-part-2">
+            <div class="my-track-part-intro">
+              <h2 id="my-track-part-2" class="my-track-part-title">Part 2: Rebuild Your Energy</h2>
+              <p class="my-track-part-desc">
+                In Part 2, you&rsquo;ll boost your energy levels by incorporating movement and joy into your day.
+              </p>
+            </div>
+            <p class="my-track-part-locked-msg">Complete Part 1 to Unlock Part 2 Activities</p>
+          </section>
+        </div>
+      </details>
+
+      <details class="my-track-card">
+        <summary class="my-track-summary">
+          <div class="my-track-summary-thumb">
+            <img src="images/stress.png" alt="" width="234" height="128" decoding="async">
+          </div>
+          <div class="my-track-summary-text">
+            <span class="my-track-summary-title">Resilience &amp; Stress Reduction</span>
+            <span class="my-track-summary-meta">2 Activities Left</span>
+          </div>
+          <span class="my-track-summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="my-track-panel">
+          <p class="my-track-placeholder">Track details placeholder.</p>
+        </div>
+      </details>
+
+      <details class="my-track-card">
+        <summary class="my-track-summary">
+          <div class="my-track-summary-thumb">
+            <img src="images/mindfulness.png" alt="" width="234" height="128" decoding="async">
+          </div>
+          <div class="my-track-summary-text">
+            <span class="my-track-summary-title">Positive Thinking &amp; Mindfulness</span>
+            <span class="my-track-summary-meta">4 Activities Left</span>
+          </div>
+          <span class="my-track-summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="my-track-panel">
+          <p class="my-track-placeholder">Track details placeholder.</p>
+        </div>
+      </details>
+
+      <details class="my-track-card">
+        <summary class="my-track-summary">
+          <div class="my-track-summary-thumb">
+            <img src="images/confidence.png" alt="" width="234" height="128" decoding="async">
+          </div>
+          <div class="my-track-summary-text">
+            <span class="my-track-summary-title">Confidence &amp; Self-Esteem</span>
+            <span class="my-track-summary-meta">3 Activities Left</span>
+          </div>
+          <span class="my-track-summary-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="my-track-panel">
+          <p class="my-track-placeholder">Track details placeholder.</p>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="scripts/default.js"></script>
+</body>
+</html>

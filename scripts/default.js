@@ -124,8 +124,82 @@ function setupAccountMenu() {
   });
 }
 
+function setupMyTracksActivityScroll() {
+  document.querySelectorAll(".my-track-activity-scroll").forEach(function (el) {
+    if (el.dataset.myTracksScrollInit === "true") return;
+    el.dataset.myTracksScrollInit = "true";
+
+    el.addEventListener(
+      "wheel",
+      function (ev) {
+        if (el.scrollWidth <= el.clientWidth) return;
+        var delta = ev.deltaX !== 0 ? ev.deltaX : ev.deltaY;
+        if (delta === 0) return;
+        var max = el.scrollWidth - el.clientWidth;
+        var next = el.scrollLeft + delta;
+        var clamped = Math.max(0, Math.min(max, next));
+        if (clamped === el.scrollLeft) return;
+        ev.preventDefault();
+        el.scrollLeft = clamped;
+      },
+      { passive: false }
+    );
+
+    var drag = null;
+
+    function endDrag(ev) {
+      if (!drag || (ev && ev.pointerId !== drag.id)) return;
+      el.classList.remove("is-dragging");
+      if (drag.dragging) {
+        el.addEventListener(
+          "click",
+          function blockClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            el.removeEventListener("click", blockClick, true);
+          },
+          true
+        );
+      }
+      try {
+        if (ev) el.releasePointerCapture(ev.pointerId);
+      } catch (ignore) {}
+      drag = null;
+    }
+
+    el.addEventListener("pointerdown", function (ev) {
+      if (ev.button !== 0) return;
+      drag = {
+        id: ev.pointerId,
+        startX: ev.clientX,
+        startScroll: el.scrollLeft,
+        dragging: false,
+      };
+      try {
+        el.setPointerCapture(ev.pointerId);
+      } catch (ignore) {}
+    });
+
+    el.addEventListener("pointermove", function (ev) {
+      if (!drag || ev.pointerId !== drag.id) return;
+      var dx = ev.clientX - drag.startX;
+      if (!drag.dragging && Math.abs(dx) > 8) {
+        drag.dragging = true;
+        el.classList.add("is-dragging");
+      }
+      if (drag.dragging) {
+        el.scrollLeft = drag.startScroll - (ev.clientX - drag.startX);
+      }
+    });
+
+    el.addEventListener("pointerup", endDrag);
+    el.addEventListener("pointercancel", endDrag);
+  });
+}
+
 function tryInitHeader() {
   setupAccountMenu();
+  setupMyTracksActivityScroll();
 
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");
