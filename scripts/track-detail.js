@@ -5,7 +5,7 @@ function getTrackSlugFromQuery() {
 }
 
 function renderTrackDetail(track) {
-  document.title = "NewLeaf — " + track.pageTitle;
+  document.title = "NewLeaf";
 
   var back = document.getElementById("track-detail-back");
   if (back) back.setAttribute("href", track.categoryBackHref);
@@ -134,7 +134,7 @@ function initTrackDetailPage() {
   if (!track) {
     if (mainBlock) mainBlock.hidden = true;
     if (missing) missing.hidden = false;
-    document.title = "NewLeaf — Track not found";
+    document.title = "NewLeaf";
     return;
   }
 
