@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/default.css">
+  <title>NewLeaf — Track</title>
+</head>
+<body>
+  <div data-include="components/header.html"></div>
+
+  <main class="page-track-detail">
+    <div class="track-detail-inner">
+      <a
+        class="track-detail-back"
+        id="track-detail-back"
+        href="explore-tracks.html"
+        aria-label="Back to category"
+      >
+        <span class="track-detail-back-icon" aria-hidden="true"></span>
+        Back
+      </a>
+
+      <div id="track-detail-missing" class="track-detail-missing" hidden>
+        <h1 class="track-detail-missing-title">Track not found</h1>
+        <p class="track-detail-missing-text">
+          We couldn't find that track. Try choosing one from Explore Tracks.
+        </p>
+        <a class="track-detail-missing-link" href="explore-tracks.html">Explore Tracks</a>
+      </div>
+
+      <div id="track-detail-main" class="track-detail-main" hidden>
+        <article class="track-detail-hero" aria-labelledby="track-detail-title">
+          <div class="track-detail-hero-top">
+            <div class="track-detail-hero-media">
+              <img
+                id="track-detail-hero-img"
+                src=""
+                alt=""
+                width="873"
+                height="353"
+                decoding="async"
+              >
+            </div>
+            <div class="track-detail-hero-aside">
+              <div class="track-detail-author-block">
+                <img
+                  id="track-detail-author-avatar"
+                  class="track-detail-author-avatar"
+                  src=""
+                  alt=""
+                  width="60"
+                  height="60"
+                  decoding="async"
+                >
+                <div class="track-detail-author-meta">
+                  <p id="track-detail-author-created" class="track-detail-author-created"></p>
+                  <p id="track-detail-author-role" class="track-detail-author-role"></p>
+                </div>
+              </div>
+              <p id="track-detail-author-bio" class="track-detail-author-bio"></p>
+              <a class="track-detail-read-bio" href="#">Read Full Bio</a>
+            </div>
+            <div class="track-detail-hero-bar">
+              <h1 id="track-detail-title" class="track-detail-hero-bar-title"></h1>
+              <button
+                type="button"
+                class="track-detail-add-btn"
+                data-track-add-btn
+                aria-pressed="false"
+              >
+                <span class="track-detail-add-btn-inner">
+                  <img
+                    class="track-detail-add-icon"
+                    data-track-add-icon
+                    src="images/plus_icon.svg"
+                    alt=""
+                    width="24"
+                    height="24"
+                    decoding="async"
+                  >
+                  <span class="track-detail-add-label" data-track-add-label>Add Track</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <div class="track-detail-columns">
+          <div class="track-detail-desc-col">
+            <h2 class="track-detail-section-label">Author’s Description</h2>
+            <div id="track-detail-author-desc" class="track-detail-author-desc"></div>
+            <button
+              type="button"
+              class="track-detail-add-btn track-detail-add-btn--inline"
+              data-track-add-btn
+              aria-pressed="false"
+            >
+              <span class="track-detail-add-btn-inner">
+                <img
+                  class="track-detail-add-icon"
+                  data-track-add-icon
+                  src="images/plus_icon.svg"
+                  alt=""
+                  width="24"
+                  height="24"
+                  decoding="async"
+                >
+                <span class="track-detail-add-label" data-track-add-label>Add Track</span>
+              </span>
+            </button>
+          </div>
+          <div class="track-detail-divider" aria-hidden="true"></div>
+          <div class="track-detail-side-col">
+            <h2 class="track-detail-section-heading">This track can help you:</h2>
+            <ul id="track-detail-helps" class="track-detail-bullets"></ul>
+            <h2 class="track-detail-section-heading track-detail-section-heading--tight">Track Details</h2>
+            <ul id="track-detail-facts" class="track-detail-bullets"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="scripts/tracks-data.js"></script>
+  <script src="scripts/track-detail.js"></script>
+  <script src="scripts/default.js"></script>
+</body>
+</html>

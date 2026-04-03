@@ -124,6 +124,29 @@ function setupAccountMenu() {
   });
 }
 
+function setupMyTracksAccordions() {
+  var main = document.querySelector("main.page-my-tracks");
+  if (!main || main.dataset.myTracksAccordionInit === "true") return;
+  main.dataset.myTracksAccordionInit = "true";
+
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get("track");
+  if (slug) {
+    slug = String(slug).trim().toLowerCase();
+  } else {
+    slug = "";
+  }
+
+  document.querySelectorAll("details.my-track-card").forEach(function (el) {
+    var cardSlug = el.getAttribute("data-my-track-slug");
+    if (slug && cardSlug && cardSlug === slug) {
+      el.open = true;
+    } else {
+      el.open = false;
+    }
+  });
+}
+
 function setupMyTracksActivityScroll() {
   document.querySelectorAll(".my-track-activity-scroll").forEach(function (el) {
     if (el.dataset.myTracksScrollInit === "true") return;
@@ -199,6 +222,7 @@ function setupMyTracksActivityScroll() {
 
 function tryInitHeader() {
   setupAccountMenu();
+  setupMyTracksAccordions();
   setupMyTracksActivityScroll();
 
   var nav = document.getElementById("primary-nav");
