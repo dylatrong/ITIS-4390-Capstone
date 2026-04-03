@@ -192,6 +192,13 @@ function setupMyTracksActivityScroll() {
 
     el.addEventListener("pointerdown", function (ev) {
       if (ev.button !== 0) return;
+      if (
+        ev.target.closest(
+          "a[href], button, input, textarea, select, label, [role='button']"
+        )
+      ) {
+        return;
+      }
       drag = {
         id: ev.pointerId,
         startX: ev.clientX,

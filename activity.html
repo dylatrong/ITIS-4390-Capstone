@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/default.css">
+  <title>NewLeaf — Activity</title>
+</head>
+<body>
+  <div data-include="components/header.html"></div>
+
+  <main class="page-activity">
+    <div class="activity-inner">
+      <div id="activity-missing" class="track-detail-missing" hidden>
+        <h1 class="track-detail-missing-title">Activity not found</h1>
+        <p class="track-detail-missing-text">
+          We couldn&rsquo;t find that activity. Return to My Tracks to continue.
+        </p>
+        <a class="track-detail-missing-link" href="my-tracks.html">My Tracks</a>
+      </div>
+
+      <div id="activity-content" class="activity-content-wrap" hidden>
+        <a
+          class="track-detail-back activity-back"
+          id="activity-back"
+          href="my-tracks.html"
+        >
+          <span class="track-detail-back-icon" aria-hidden="true"></span>
+          Back to Track
+        </a>
+
+        <article class="activity-sheet">
+          <header class="activity-sheet-banner">
+            <h1 class="activity-sheet-title" id="activity-banner-title"></h1>
+          </header>
+
+          <div class="activity-sheet-body">
+            <div class="activity-main">
+              <div class="activity-rail-node activity-rail-node--1" aria-hidden="true">
+                <span class="activity-rail-icon activity-rail-icon--coffee"></span>
+              </div>
+              <h2 id="activity-label-intro" class="activity-section-label activity-main-title activity-main-title--1"></h2>
+
+              <div class="activity-rail-spine" aria-hidden="true"></div>
+              <div class="activity-intro" role="region" aria-labelledby="activity-label-intro">
+                <div class="activity-intro-media">
+                  <img
+                    id="activity-intro-img"
+                    src=""
+                    alt=""
+                    width="282"
+                    height="208"
+                    decoding="async"
+                  >
+                </div>
+                <div class="activity-intro-text" id="activity-intro-copy"></div>
+              </div>
+
+              <div class="activity-rail-node activity-rail-node--2" aria-hidden="true">
+                <span class="activity-rail-icon activity-rail-icon--list"></span>
+              </div>
+              <h2 id="activity-label-plan" class="activity-section-label activity-main-title activity-main-title--2"></h2>
+
+              <div class="activity-main-plan" role="region" aria-labelledby="activity-label-plan">
+                <div class="activity-plan">
+                  <div class="activity-plan-header">
+                    <h3 class="activity-plan-title" id="activity-plan-title"></h3>
+                    <p class="activity-plan-hint" id="activity-plan-hint"></p>
+                  </div>
+                  <label class="sr-only" for="activity-plan-notes">Your plan</label>
+                  <textarea
+                    id="activity-plan-notes"
+                    class="activity-plan-textarea"
+                    rows="6"
+                    autocomplete="off"
+                  ></textarea>
+                </div>
+
+                <div class="activity-actions">
+                  <button type="button" class="activity-btn activity-btn--primary" id="activity-btn-pledge">
+                    Pledge to it
+                  </button>
+                  <button type="button" class="activity-btn activity-btn--secondary">
+                    I Did it!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="scripts/activities-data.js"></script>
+  <script src="scripts/activity-page.js"></script>
+  <script src="scripts/default.js"></script>
+</body>
+</html>
