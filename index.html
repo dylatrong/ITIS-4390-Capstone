@@ -1,25 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles/default.css">
-    <title>Main Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles/default.css">
+  <title>NewLeaf — Home</title>
 </head>
 <body>
-    <div data-include="components/header.html"></div>
-        <main>
-            <h1>
-                Test Heading
-            </h1>
-            <p>
-                We will be using HTML, CSS and JavaScript.
-            </p>      
-        </main>
-    <div data-include="components/footer.html"></div>
-    <script src="scripts/HTMLInclude.min.js"></script>
-    <script src="scripts/default.js"></script>
+  <div data-include="components/header.html"></div>
+
+  <main class="page-home">
+    <div class="home-hero-bg"></div>
+    
+    <div class="home-content container">
+      
+      <div class="home-search-container">
+        <div class="explore-search" role="search" aria-label="Search tracks">
+          <div class="explore-search-field">
+            <span class="explore-search-icon" aria-hidden="true"></span>
+            <label class="sr-only" for="home-search-input">Search for tracks</label>
+            <input
+              id="home-search-input"
+              class="explore-search-input"
+              type="search"
+              name="q"
+              placeholder="Search for Tracks..."
+              autocomplete="off"
+            >
+          </div>
+        </div>
+      </div>
+
+      <h1 class="home-greeting">Hi, Jack!</h1>
+
+      <div class="home-grid">
+        
+        <div class="col-left">
+          
+          <a href="#" class="home-card-bg daily-checkin">
+            <div>
+              <h2>Daily Check In <span>✏️</span></h2>
+              <p>Record your daily check in content here</p>
+            </div>
+            <span class="explore-icon-chevron" style="width: 2.5rem; height: 2.5rem;"></span>
+          </a>
+
+          <div class="home-card-bg">
+            <div class="pill-title">Check In Statistics</div>
+            
+            <img src="images/linechart.svg" alt="Check In Chart from Monday to Sunday" class="stats-chart">
+            
+            <h3 class="snapshot-title">Your Emotional Snapshot:</h3>
+            <ul class="snapshot-list">
+              <li>
+                <strong>Monday:</strong>
+                <span>• You felt confident! Keep up this winning streak.</span>
+              </li>
+              <li>
+                <strong>Sunday:</strong>
+                <span>• You felt tired emotionally. It will not last forever, Jack.</span>
+              </li>
+              <li>
+                <strong>Saturday:</strong>
+                <span>• You felt happy! An interesting day of love and joy.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col-right home-card-bg" style="padding-top: var(--space-5);">
+          
+          <div class="pill-title">Current Tracks</div>
+
+          <a href="#" class="track-list-card">
+            <img src="images/meditation.jpg" alt="A man meditating in a grass field" class="track-list-img">
+            <div class="track-list-content">
+              <div class="track-list-text">
+                <h4>Resilience & Stress Reduction</h4>
+                <p>Continue your journey learning soothing meditation patterns</p>
+              </div>
+              <span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span>
+            </div>
+          </a>
+
+          <a href="#" class="track-list-card">
+            <img src="images/mindfulness.jpg" alt="A dandelion still" class="track-list-img">
+            <div class="track-list-content">
+              <div class="track-list-text">
+                <h4>Positive Thinking & Mindfulness</h4>
+                <p>Continue your journey learning soothing meditation patterns</p>
+              </div>
+              <span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span>
+            </div>
+          </a>
+
+          <a href="#" class="track-list-card">
+            <img src="images/confidence.jpg" alt="City sky line" class="track-list-img">
+            <div class="track-list-content">
+              <div class="track-list-text">
+                <h4>Confidence & Self-Esteem</h4>
+                <p>Continue your journey learning soothing meditation patterns</p>
+              </div>
+              <span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <div data-include="components/footer.html"></div>
+  <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="scripts/default.js"></script>
 </body>
 </html>

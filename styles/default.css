@@ -1876,7 +1876,6 @@ main.page-category {
     text-align: left;
   }
 }
-
 /* ——— Track detail (Figma 349:4178) ——— */
 main.page-track-detail {
   padding-block: var(--space-5) var(--space-7);
@@ -2344,5 +2343,196 @@ main.page-track-detail {
   .track-detail-section-heading {
     font-size: var(--text-lg-size);
     line-height: var(--text-lg-leading);
+  }
+}
+
+
+/* Home page specific layout styles */
+.page-home {
+  padding-block: 0;
+  position: relative;
+}
+
+.home-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35rem;
+  background-image: url("../images/mountain.jpg");
+  background-size: cover;
+  background-position: center top;
+  z-index: 0;
+}
+
+.home-content {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-7);
+}
+
+.home-search-container {
+  margin-bottom: var(--space-5);
+}
+
+.home-search-container .explore-search {
+  max-width: 100%;
+  border-radius: 999px; /* Fully rounded search bar matching image */
+  background-color: var(--color-bg-primary);
+}
+
+.home-greeting {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: var(--space-5);
+  color: var(--color-text-primary);
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.home-card-bg {
+  background-color: var(--color-disabled-bg); /* Matches the light gray surface */
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-md);
+}
+
+/* Left Column */
+.col-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.daily-checkin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.daily-checkin h2 {
+  margin: 0 0 var(--space-1) 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.daily-checkin p {
+  margin: 0;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+.pill-title {
+  background-color: var(--color-bg-primary);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-6);
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0 auto var(--space-4) auto;
+  width: max-content;
+  box-shadow: var(--shadow-sm);
+}
+
+.stats-chart {
+  width: 100%;
+  border-radius: var(--space-2);
+  margin-bottom: var(--space-4);
+  background-color: white;
+  padding: var(--space-2);
+}
+
+.snapshot-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+}
+
+.snapshot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+.snapshot-list li {
+  margin-bottom: var(--space-2);
+}
+
+.snapshot-list strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.snapshot-list span {
+  display: block;
+  padding-left: var(--space-3);
+}
+
+/* Right Column */
+.col-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.track-list-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--space-3);
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.track-list-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.track-list-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.track-list-content {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.track-list-text h4 {
+  margin: 0 0 4px 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+.track-list-text p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+@media (max-width: 1024px) {
+  .home-grid {
+    grid-template-columns: 1fr;
   }
 }
