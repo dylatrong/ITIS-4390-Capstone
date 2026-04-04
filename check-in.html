@@ -12,10 +12,129 @@
 <body>
   <div data-include="components/header.html"></div>
 
-  <main class="page-checkin">
-    <div class="container">
-      <h1>Daily Check-In</h1>
-      <p>Take a moment to reflect on how you're feeling today.</p>
+  <main class="page-home page-checkin">
+    <div class="home-hero-bg"></div>
+
+    <div class="home-content container">
+      <div class="home-search-container">
+        <div class="explore-search" role="search" aria-label="Search tracks">
+          <div class="explore-search-field">
+            <span class="explore-search-icon" aria-hidden="true"></span>
+            <label class="sr-only" for="checkin-search-input">Search for tracks</label>
+            <input
+              id="checkin-search-input"
+              class="explore-search-input"
+              type="search"
+              name="q"
+              placeholder="Search for Tracks..."
+              autocomplete="off"
+            >
+          </div>
+        </div>
+      </div>
+
+      <h1 class="home-greeting">Hi, Jack!</h1>
+
+      <section class="checkin-section">
+        <div class="checkin-form-bg">
+          <a href="index.html" class="checkin-back">← Back</a>
+
+          <div class="pill-title">Daily Check-In</div>
+
+          <p class="checkin-subtitle">
+            Take a moment to reflect on how you're feeling today.
+          </p>
+
+          <form class="checkin-form" action="check-in-success.html">
+            <div class="checkin-group">
+              <label class="checkin-label">How are you feeling right now?</label>
+
+              <div class="mood-options">
+                <label class="mood-option">
+                  <input type="radio" name="mood" value="happy">
+                  <span>😊</span>
+                </label>
+
+                <label class="mood-option">
+                  <input type="radio" name="mood" value="neutral">
+                  <span>😐</span>
+                </label>
+
+                <label class="mood-option">
+                  <input type="radio" name="mood" value="sad">
+                  <span>☹️</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="checkin-group">
+              <label class="checkin-label">Energy Level</label>
+
+              <div class="checkin-row">
+                <label>
+                  <input type="radio" name="energy" value="low">
+                  Low
+                </label>
+
+                <label>
+                  <input type="radio" name="energy" value="medium">
+                  Medium
+                </label>
+
+                <label>
+                  <input type="radio" name="energy" value="high">
+                  High
+                </label>
+              </div>
+            </div>
+
+            <div class="checkin-group">
+              <label class="checkin-label">What’s affecting your mood today?</label>
+
+              <div class="checkin-row">
+                <label>
+                  <input type="checkbox" name="factor" value="work">
+                  Work
+                </label>
+
+                <label>
+                  <input type="checkbox" name="factor" value="school">
+                  School
+                </label>
+
+                <label>
+                  <input type="checkbox" name="factor" value="health">
+                  Health
+                </label>
+
+                <label>
+                  <input type="checkbox" name="factor" value="sleep">
+                  Sleep
+                </label>
+
+                <label>
+                  <input type="checkbox" name="factor" value="relationships">
+                  Relationships
+                </label>
+              </div>
+            </div>
+
+            <div class="checkin-group">
+              <label class="checkin-label" for="other">Other</label>
+              <input type="text" id="other" name="other">
+            </div>
+
+            <div class="checkin-group">
+              <label class="checkin-label" for="reflection">Reflection</label>
+              <textarea id="reflection" name="reflection" rows="5"></textarea>
+            </div>
+
+            <div class="checkin-button-row">
+              <button type="submit">Save Check-In</button>
+            </div>
+          </form>
+        </div>
+      </section>
     </div>
   </main>
 
