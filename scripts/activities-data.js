@@ -7,7 +7,7 @@ window.ACTIVITIES_DATA = {
     bannerTitle: "Wind Down",
     backHref: "my-tracks.html?track=work-burnout",
     introSectionTitle: "Disconnect and Reflect",
-    introImage: "images/disconnect.png",
+    introImage: "/assets/images/disconnect.png",
     introImageAlt: "",
     introParagraphs: [
       "Take some time this evening to unwind from your day. When it's almost time for bed, set your phone and other devices aside. Then, turn down the lights and try journaling, reading, practicing self-reflection grounded in gratitude, doing some gentle movement, or another calming activity.",

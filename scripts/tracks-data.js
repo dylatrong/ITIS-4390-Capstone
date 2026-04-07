@@ -6,11 +6,11 @@ window.TRACKS_DATA = {
     slug: "work-burnout",
     pageTitle: "Find Balance After Work Burnout",
     categoryBackHref: "category-work-money.html",
-    heroImage: "images/work-burnout.png",
+    heroImage: "/assets/images/work-burnout.png",
     heroImageAlt: "",
     authorName: "Saeromi Kim, Ph.D.",
     authorRole: "Clinical Psychologist",
-    authorAvatar: "images/Kim.png",
+    authorAvatar: "/assets/images/Kim.png",
     authorAvatarAlt: "",
     authorCreatedLabel: "Created by  Saeromi Kim, Ph.D.",
     authorBioShort:
