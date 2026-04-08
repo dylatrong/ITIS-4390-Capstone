@@ -4,6 +4,7 @@ var NEWLEAF_DEFAULT_HOME_TRACKS = [
   "confidence-self-esteem",
 ];
 
+// Reads slugs the user manually hid on My Tracks.
 function getHiddenTracksList() {
   try {
     var raw = window.localStorage.getItem("newleaf-hidden-my-tracks");
@@ -14,12 +15,14 @@ function getHiddenTracksList() {
   }
 }
 
+// Saves hidden track slugs so the hide state persists.
 function setHiddenTracksList(list) {
   try {
     window.localStorage.setItem("newleaf-hidden-my-tracks", JSON.stringify(list));
   } catch (ignore) {}
 }
 
+// Gets enrolled tracks; seeds first-time users with 3 default homepage tracks.
 function getEnrolledTracks() {
   var enrolled = [];
   var hasStoredValue = false;
@@ -47,17 +50,20 @@ function getEnrolledTracks() {
   });
 }
 
+// Persists the current enrolled track list.
 function setEnrolledTracks(list) {
   try {
     window.localStorage.setItem("newleaf-enrolled-tracks", JSON.stringify(list));
   } catch (ignore) {}
 }
 
+// Helper for quick enrolled checks by slug.
 function isTrackEnrolled(slug) {
   if (!slug) return false;
   return getEnrolledTracks().indexOf(slug) !== -1;
 }
 
+// Single place to enroll/unenroll a track and sync storage flags.
 function setTrackEnrolled(slug, enrolled) {
   if (!slug) return;
   var list = getEnrolledTracks();
@@ -86,6 +92,7 @@ window.NewLeafTrackState = {
   setTrackEnrolled: setTrackEnrolled,
 };
 
+// Handles nav menu open/close behavior and active-link highlighting.
 function setupSiteHeader() {
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");
@@ -134,6 +141,7 @@ function setupSiteHeader() {
   });
 }
 
+// Controls the profile/account slide-out drawer interactions.
 function setupAccountMenu() {
   var wrap = document.querySelector(".nav-account-wrap");
   if (!wrap || wrap.dataset.accountMenuInit === "true") return;
@@ -212,6 +220,7 @@ function setupAccountMenu() {
   });
 }
 
+// Makes My Tracks act like an accordion (only one open at a time).
 function setupMyTracksAccordions() {
   var main = document.querySelector("main.page-my-tracks");
   if (!main || main.dataset.myTracksAccordionInit === "true") return;
@@ -246,6 +255,7 @@ function setupMyTracksAccordions() {
   });
 }
 
+// Enables horizontal wheel + drag scrolling on activity card rails.
 function setupMyTracksActivityScroll() {
   document.querySelectorAll(".my-track-activity-scroll").forEach(function (el) {
     if (el.dataset.myTracksScrollInit === "true") return;
@@ -326,6 +336,7 @@ function setupMyTracksActivityScroll() {
   });
 }
 
+// Handles leave-track modal, hide logic, and query-based open/scroll.
 function setupMyTracksLeaveFlow() {
   var main = document.querySelector("main.page-my-tracks");
   if (!main || main.dataset.myTracksLeaveInit === "true") return;
@@ -463,6 +474,7 @@ function setupMyTracksLeaveFlow() {
   });
 }
 
+// Renders up to 3 enrolled tracks in the homepage "Current Tracks" panel.
 function setupHomeCurrentTracks() {
   var main = document.querySelector("main.page-home");
   if (!main || main.dataset.homeTracksInit === "true") return;
@@ -547,12 +559,156 @@ function setupHomeCurrentTracks() {
   seeMore.style.display = showSeeMore ? "inline-flex" : "none";
 }
 
+// Shared client-side search suggestions for Home + Explore.
+function setupSearchSuggestions() {
+  var searchBlocks = document.querySelectorAll(".explore-search");
+  if (!searchBlocks.length) return;
+
+  // Static category suggestions (always available).
+  var categorySeed = [
+    { title: "Relationships", href: "category-relationships.html", meta: "Category", kind: "category" },
+    { title: "Mindfulness & Meditation", href: "category-mindfulness.html", meta: "Category", kind: "category" },
+    { title: "Personal Growth", href: "category-personal-growth.html", meta: "Category", kind: "category" },
+    { title: "Family & Kids", href: "category-family-kids.html", meta: "Category", kind: "category" },
+    { title: "Health & Well-Being", href: "category-health.html", meta: "Category", kind: "category" },
+    { title: "Work & Money", href: "category-work-money.html", meta: "Category", kind: "category" },
+  ];
+
+  // Dynamic track suggestions are generated from TRACKS_DATA.
+  var trackSeed = [];
+  var trackData = window.TRACKS_DATA || {};
+  Object.keys(trackData).forEach(function (slug) {
+    var item = trackData[slug];
+    if (!item || !item.pageTitle) return;
+    trackSeed.push({
+      title: item.pageTitle,
+      href: "track-detail.html?track=" + encodeURIComponent(slug),
+      meta: "Track",
+      kind: "track",
+    });
+  });
+
+  // One combined source list used for simple client-side filtering.
+  var source = categorySeed.concat(trackSeed);
+
+  function renderResults(searchRoot, matches) {
+    var dropdown = searchRoot.querySelector(".explore-search-dropdown");
+    var divider = searchRoot.querySelector(".explore-search-divider");
+    var list = searchRoot.querySelector(".explore-search-results");
+    var empty = searchRoot.querySelector(".explore-search-empty");
+    if (!dropdown || !divider || !list || !empty) return;
+
+    list.innerHTML = "";
+    if (!matches.length) {
+      // Show the empty state when query has no matches.
+      dropdown.hidden = false;
+      divider.hidden = false;
+      list.hidden = true;
+      empty.hidden = false;
+      searchRoot.classList.remove("explore-search--closed");
+      return;
+    }
+
+    // Build each result row as a clickable suggestion.
+    matches.forEach(function (match) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.className = "explore-search-result";
+      a.href = match.href;
+      a.innerHTML =
+        '<span class="explore-search-result-title explore-search-result-title--' +
+        (match.kind || "track") +
+        '">' +
+        match.title +
+        '</span><span class="explore-search-result-meta explore-search-result-meta--' +
+        (match.kind || "track") +
+        '">' +
+        match.meta +
+        '<span class="explore-icon-chevron" aria-hidden="true"></span></span>';
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    dropdown.hidden = false;
+    divider.hidden = false;
+    list.hidden = false;
+    empty.hidden = true;
+    searchRoot.classList.remove("explore-search--closed");
+  }
+
+  searchBlocks.forEach(function (searchRoot) {
+    if (searchRoot.dataset.searchInit === "true") return;
+    searchRoot.dataset.searchInit = "true";
+
+    var input = searchRoot.querySelector(".explore-search-input");
+    var dropdown = searchRoot.querySelector(".explore-search-dropdown");
+    var divider = searchRoot.querySelector(".explore-search-divider");
+    var list = searchRoot.querySelector(".explore-search-results");
+    var empty = searchRoot.querySelector(".explore-search-empty");
+    if (!input || !dropdown || !divider || !list || !empty) return;
+
+    function closeSuggestions() {
+      // Full reset used when user presses Escape.
+      input.value = "";
+      searchRoot.classList.add("explore-search--closed");
+      dropdown.hidden = true;
+      divider.hidden = true;
+      list.hidden = true;
+      empty.hidden = true;
+      list.innerHTML = "";
+    }
+
+    function updateSuggestions() {
+      var query = String(input.value || "").trim().toLowerCase();
+      if (!query) {
+        // If input is cleared, hide the suggestion panel.
+        searchRoot.classList.add("explore-search--closed");
+        dropdown.hidden = true;
+        divider.hidden = true;
+        list.hidden = true;
+        empty.hidden = true;
+        list.innerHTML = "";
+        return;
+      }
+
+      var matches = source.filter(function (item) {
+        // Basic contains match; updates on every keystroke.
+        return item.title.toLowerCase().indexOf(query) !== -1;
+      });
+      renderResults(searchRoot, matches);
+    }
+
+    input.addEventListener("input", updateSuggestions);
+
+    input.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") {
+        ev.preventDefault();
+        closeSuggestions();
+        input.blur();
+      }
+    });
+
+    document.addEventListener("click", function (ev) {
+      // Clicking outside closes the open suggestion panel.
+      if (!searchRoot.contains(ev.target)) {
+        searchRoot.classList.add("explore-search--closed");
+        dropdown.hidden = true;
+        divider.hidden = true;
+        list.hidden = true;
+        empty.hidden = true;
+      }
+    });
+  });
+}
+
+// Runs page-level setup safely on whichever page is loaded.
 function tryInitHeader() {
   setupAccountMenu();
   setupMyTracksAccordions();
   setupMyTracksActivityScroll();
   setupMyTracksLeaveFlow();
   setupHomeCurrentTracks();
+  setupSearchSuggestions();
 
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");

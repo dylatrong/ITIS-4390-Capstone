@@ -1,9 +1,11 @@
+// Reads and normalizes the ?track= slug from the URL.
 function getTrackSlugFromQuery() {
   var params = new URLSearchParams(window.location.search);
   var raw = params.get("track");
   return raw ? String(raw).trim().toLowerCase() : "";
 }
 
+// Paints all dynamic track detail content from TRACKS_DATA.
 function renderTrackDetail(track) {
   document.title = "NewLeaf";
 
@@ -75,6 +77,7 @@ function renderTrackDetail(track) {
   }
 }
 
+// Controls Add Track / Go to Track button state and add-confirm modal.
 function setupTrackAddButtons() {
   var buttons = document.querySelectorAll("[data-track-add-btn]");
   if (!buttons.length) return;
@@ -183,6 +186,7 @@ function setupTrackAddButtons() {
   });
 }
 
+// Opens the full author bio modal and injects long-form bio content.
 function setupTrackBioModal(track) {
   var readLink = document.getElementById("track-detail-read-bio");
   var modal = document.getElementById("track-bio-modal");
@@ -245,6 +249,7 @@ function setupTrackBioModal(track) {
   });
 }
 
+// Entry point: resolves slug, handles missing tracks, then initializes UI.
 function initTrackDetailPage() {
   var slug = getTrackSlugFromQuery();
   var data = window.TRACKS_DATA || {};
