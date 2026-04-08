@@ -227,10 +227,154 @@ function setupMyTracksActivityScroll() {
   });
 }
 
+function setupMyTracksLeaveFlow() {
+  var main = document.querySelector("main.page-my-tracks");
+  if (!main || main.dataset.myTracksLeaveInit === "true") return;
+  main.dataset.myTracksLeaveInit = "true";
+
+  var cards = Array.prototype.slice.call(
+    document.querySelectorAll("details.my-track-card")
+  );
+  var emptyState = document.getElementById("my-tracks-empty");
+  var modal = document.getElementById("my-track-leave-modal");
+  var modalConfirm = document.getElementById("my-track-leave-confirm");
+  var modalCloseEls = document.querySelectorAll("[data-my-track-leave-close]");
+  var pendingCard = null;
+
+  function getHiddenTracks() {
+    try {
+      var raw = window.localStorage.getItem("newleaf-hidden-my-tracks");
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (ignore) {
+      return [];
+    }
+  }
+
+  function setHiddenTracks(list) {
+    try {
+      window.localStorage.setItem(
+        "newleaf-hidden-my-tracks",
+        JSON.stringify(list)
+      );
+    } catch (ignore) {}
+  }
+
+  function setTrackAddedState(slug, added) {
+    if (!slug) return;
+    try {
+      window.sessionStorage.setItem(
+        "newleaf-track-added-" + slug,
+        added ? "1" : "0"
+      );
+    } catch (ignore) {}
+  }
+
+  function updateEmptyState() {
+    if (!emptyState) return;
+    var anyVisible = cards.some(function (card) {
+      return !card.hidden;
+    });
+    emptyState.hidden = anyVisible;
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.classList.remove("my-track-leave-modal-open");
+    pendingCard = null;
+  }
+
+  function openModal(card) {
+    if (!modal) return;
+    pendingCard = card;
+    modal.hidden = false;
+    document.body.classList.add("my-track-leave-modal-open");
+    if (modalConfirm) modalConfirm.focus();
+  }
+
+  function applyHiddenTracks(slugToShow) {
+    var hiddenSet = {};
+    getHiddenTracks().forEach(function (slug) {
+      hiddenSet[slug] = true;
+    });
+
+    cards.forEach(function (card) {
+      var slug = card.getAttribute("data-my-track-slug") || "";
+      if (!slug) return;
+      if (slugToShow && slug === slugToShow) {
+        delete hiddenSet[slug];
+        card.hidden = false;
+        return;
+      }
+      card.hidden = Boolean(hiddenSet[slug]);
+    });
+
+    setHiddenTracks(Object.keys(hiddenSet));
+    updateEmptyState();
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var slugFromQuery = params.get("track");
+  if (slugFromQuery) {
+    slugFromQuery = String(slugFromQuery).trim().toLowerCase();
+    setTrackAddedState(slugFromQuery, true);
+  } else {
+    slugFromQuery = "";
+  }
+  applyHiddenTracks(slugFromQuery);
+
+  document
+    .querySelectorAll("[data-my-track-leave-btn]")
+    .forEach(function (button) {
+      button.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var card = button.closest("details.my-track-card");
+        if (!card) return;
+        openModal(card);
+      });
+    });
+
+  if (modalCloseEls.length) {
+    modalCloseEls.forEach(function (el) {
+      el.addEventListener("click", closeModal);
+    });
+  }
+
+  if (modalConfirm) {
+    modalConfirm.addEventListener("click", function () {
+      if (!pendingCard) {
+        closeModal();
+        return;
+      }
+      var slug = pendingCard.getAttribute("data-my-track-slug") || "";
+      pendingCard.open = false;
+      pendingCard.hidden = true;
+      if (slug) {
+        var hiddenTracks = getHiddenTracks();
+        if (hiddenTracks.indexOf(slug) === -1) hiddenTracks.push(slug);
+        setHiddenTracks(hiddenTracks);
+        setTrackAddedState(slug, false);
+      }
+      closeModal();
+      updateEmptyState();
+    });
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && modal && !modal.hidden) {
+      ev.preventDefault();
+      closeModal();
+    }
+  });
+}
+
 function tryInitHeader() {
   setupAccountMenu();
   setupMyTracksAccordions();
   setupMyTracksActivityScroll();
+  setupMyTracksLeaveFlow();
 
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");

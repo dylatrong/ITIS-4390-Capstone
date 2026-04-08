@@ -121,6 +121,42 @@
           </div>
         </div>
       </div>
+
+      <div
+        id="track-add-modal"
+        class="track-add-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="track-add-modal-title"
+        aria-describedby="track-add-modal-text"
+        hidden
+      >
+        <div class="track-add-modal-backdrop" data-track-add-modal-close></div>
+        <div class="track-add-modal-card">
+          <p id="track-add-modal-title" class="track-add-modal-title">
+            Track Added Successfully!
+          </p>
+          <p id="track-add-modal-text" class="track-add-modal-text">
+            Would you like to start the track now?
+          </p>
+          <div class="track-add-modal-actions">
+            <button
+              type="button"
+              class="track-add-modal-btn track-add-modal-btn--link"
+              data-track-add-modal-close
+            >
+              No Thanks!
+            </button>
+            <button
+              type="button"
+              class="track-add-modal-btn track-add-modal-btn--primary"
+              id="track-add-modal-confirm"
+            >
+              Yes! Take me to the track.
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 

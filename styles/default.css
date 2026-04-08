@@ -1568,6 +1568,13 @@ main.page-category {
   color: var(--color-text-secondary);
 }
 
+.my-track-summary-meta-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: fit-content;
+}
+
 .my-track-summary-chevron {
   display: block;
   width: var(--space-6);
@@ -1593,6 +1600,141 @@ main.page-category {
   padding: var(--space-6) var(--space-6) var(--space-5);
   background-color: var(--color-bg-primary);
   border-top: 1px solid var(--color-border-subtle);
+}
+
+.my-track-leave-btn {
+  border: 1px solid var(--color-brand-primary);
+  border-radius: var(--space-3);
+  background-color: var(--color-brand-primary);
+  color: var(--footer-text-inverse);
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.my-track-leave-btn:hover {
+  background-color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+}
+
+.my-track-leave-btn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.my-tracks-empty {
+  margin: 0;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-primary);
+  box-shadow: var(--shadow-nav);
+  font-family: var(--font-body);
+  font-size: var(--text-xs-size);
+  line-height: var(--text-xs-leading);
+  color: var(--color-text-secondary);
+}
+
+.my-track-leave-modal-open {
+  overflow: hidden;
+}
+
+.my-track-leave-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+}
+
+.my-track-leave-modal[hidden] {
+  display: none;
+}
+
+.my-track-leave-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.82) 0%, rgba(12, 12, 12, 0.72) 100%);
+}
+
+.my-track-leave-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 30rem);
+  border-radius: 1.25rem;
+  background-color: var(--color-bg-primary);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.1),
+    0 0 12px rgba(0, 0, 0, 0.08);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.my-track-leave-modal-title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-lg-size);
+  line-height: var(--text-lg-leading);
+  letter-spacing: -0.03125rem;
+  color: var(--color-text-primary);
+}
+
+.my-track-leave-modal-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-xs-size);
+  line-height: var(--text-xs-leading);
+  color: var(--color-text-secondary);
+}
+
+.my-track-leave-modal-actions {
+  margin-top: var(--space-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.my-track-leave-modal-btn {
+  border: 1px solid transparent;
+  border-radius: var(--space-3);
+  padding: var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--nav-link-size);
+  line-height: var(--nav-link-line-height);
+  cursor: pointer;
+}
+
+.my-track-leave-modal-btn--link {
+  background-color: transparent;
+  color: var(--color-brand-secondary);
+}
+
+.my-track-leave-modal-btn--link:hover {
+  color: var(--color-brand-secondary-hover);
+}
+
+.my-track-leave-modal-btn--danger {
+  background-color: var(--color-brand-primary);
+  color: var(--footer-text-inverse);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 6px rgba(0, 0, 0, 0.08);
+}
+
+.my-track-leave-modal-btn--danger:hover {
+  background-color: var(--color-brand-primary-hover);
+}
+
+.my-track-leave-modal-btn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
 }
 
 .my-track-part {
@@ -1853,6 +1995,10 @@ main.page-category {
   .my-track-summary-text {
     padding: var(--space-4);
     padding-inline-end: 0;
+  }
+
+  .my-track-summary-meta-row {
+    flex-wrap: wrap;
   }
 
   .my-track-summary-chevron {
@@ -2197,6 +2343,107 @@ main.page-track-detail {
   align-self: flex-start;
 }
 
+.track-add-modal-open {
+  overflow: hidden;
+}
+
+.track-add-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+}
+
+.track-add-modal[hidden] {
+  display: none;
+}
+
+.track-add-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.82) 0%, rgba(12, 12, 12, 0.72) 100%);
+}
+
+.track-add-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 30.75rem);
+  border-radius: 1.25rem;
+  background-color: var(--color-bg-primary);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.1),
+    0 0 12px rgba(0, 0, 0, 0.08);
+  padding: var(--space-7) var(--space-6);
+  text-align: center;
+}
+
+.track-add-modal-title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.03125rem;
+  color: #026600;
+}
+
+.track-add-modal-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  letter-spacing: -0.0625rem;
+  color: var(--color-text-primary);
+}
+
+.track-add-modal-actions {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.track-add-modal-btn {
+  border: 1px solid transparent;
+  border-radius: var(--space-3);
+  padding: var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--nav-link-size);
+  line-height: var(--nav-link-line-height);
+  cursor: pointer;
+}
+
+.track-add-modal-btn--link {
+  background-color: transparent;
+  color: var(--color-brand-secondary);
+}
+
+.track-add-modal-btn--link:hover {
+  color: var(--color-brand-secondary-hover);
+}
+
+.track-add-modal-btn--primary {
+  background-color: var(--color-brand-primary);
+  color: var(--footer-text-inverse);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 6px rgba(0, 0, 0, 0.08);
+}
+
+.track-add-modal-btn--primary:hover {
+  background-color: var(--color-brand-primary-hover);
+}
+
+.track-add-modal-btn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
 .track-detail-columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 2px minmax(0, 24rem);
@@ -2344,6 +2591,15 @@ main.page-track-detail {
   .track-detail-section-heading {
     font-size: var(--text-lg-size);
     line-height: var(--text-lg-leading);
+  }
+
+  .track-add-modal-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .track-add-modal-text {
+    font-size: 2rem;
+    line-height: 2.5rem;
   }
 }
 

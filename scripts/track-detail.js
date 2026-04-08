@@ -79,7 +79,41 @@ function setupTrackAddButtons() {
   var buttons = document.querySelectorAll("[data-track-add-btn]");
   if (!buttons.length) return;
 
-  var storageKey = "newleaf-track-added-" + getTrackSlugFromQuery();
+  var slug = getTrackSlugFromQuery();
+  var storageKey = "newleaf-track-added-" + slug;
+  var modal = document.getElementById("track-add-modal");
+  var modalConfirm = document.getElementById("track-add-modal-confirm");
+  var modalCloseEls = document.querySelectorAll("[data-track-add-modal-close]");
+  var lastTriggerButton = null;
+  var isModalOpen = false;
+
+  function goToTrack() {
+    if (slug) {
+      window.location.href = "my-tracks.html?track=" + encodeURIComponent(slug);
+    } else {
+      window.location.href = "my-tracks.html";
+    }
+  }
+
+  function openModal(triggerButton) {
+    if (!modal) {
+      goToTrack();
+      return;
+    }
+    lastTriggerButton = triggerButton || null;
+    modal.hidden = false;
+    isModalOpen = true;
+    document.body.classList.add("track-add-modal-open");
+    if (modalConfirm) modalConfirm.focus();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.hidden = true;
+    isModalOpen = false;
+    document.body.classList.remove("track-add-modal-open");
+    if (lastTriggerButton) lastTriggerButton.focus();
+  }
 
   function applyState(added) {
     buttons.forEach(function (btn) {
@@ -105,20 +139,37 @@ function setupTrackAddButtons() {
     }
   } catch (ignore) {}
 
+  if (modalCloseEls.length) {
+    modalCloseEls.forEach(function (el) {
+      el.addEventListener("click", closeModal);
+    });
+  }
+
+  if (modalConfirm) {
+    modalConfirm.addEventListener("click", function () {
+      closeModal();
+      goToTrack();
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && isModalOpen) {
+      event.preventDefault();
+      closeModal();
+    }
+  });
+
   buttons.forEach(function (btn) {
     btn.addEventListener("click", function () {
       if (btn.classList.contains("is-added")) {
-        var s = getTrackSlugFromQuery();
-        if (s) {
-          window.location.href =
-            "my-tracks.html?track=" + encodeURIComponent(s);
-        }
+        goToTrack();
         return;
       }
       applyState(true);
       try {
         window.sessionStorage.setItem(storageKey, "1");
       } catch (ignore) {}
+      openModal(btn);
     });
   });
 }
