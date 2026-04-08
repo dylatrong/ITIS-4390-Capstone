@@ -1575,6 +1575,29 @@ main.page-category {
   width: fit-content;
 }
 
+.my-track-view-link {
+  color: var(--color-brand-secondary);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  padding: var(--space-1) 0;
+  position: relative;
+  z-index: 2;
+}
+
+.my-track-view-link:hover {
+  color: var(--color-brand-secondary-hover);
+  text-decoration: underline;
+}
+
+.my-track-view-link:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--space-1);
+}
+
 .my-track-summary-chevron {
   display: block;
   width: var(--space-6);

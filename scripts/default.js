@@ -327,12 +327,21 @@ function setupMyTracksLeaveFlow() {
   document
     .querySelectorAll("[data-my-track-leave-btn]")
     .forEach(function (button) {
+      button.setAttribute("data-my-track-control", "true");
       button.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
         var card = button.closest("details.my-track-card");
         if (!card) return;
         openModal(card);
+      });
+    });
+
+  document
+    .querySelectorAll("[data-my-track-control]")
+    .forEach(function (control) {
+      control.addEventListener("click", function (ev) {
+        ev.stopPropagation();
       });
     });
 
