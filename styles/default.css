@@ -3679,3 +3679,9 @@ main.page-activity article.activity-sheet {
   border-color: var(--color-brand-primary-hover);
   color: var(--footer-text-inverse);
 }
+
+/* Keep homepage search visually identical to Explore page search. */
+.page-home .explore-search {
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+}
