@@ -75,37 +75,24 @@
           
           <div class="pill-title">Current Tracks</div>
 
-          <a href="#" class="track-list-card">
-            <img src="/assets/images/meditation.jpg" alt="A man meditating in a grass field" class="track-list-img">
-            <div class="track-list-content">
-              <div class="track-list-text">
-                <h4>Resilience & Stress Reduction</h4>
-                <p>Continue your journey learning soothing meditation patterns</p>
-              </div>
-              <span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span>
-            </div>
+          <div id="home-current-tracks-list"></div>
+
+          <p id="home-current-tracks-empty" class="home-current-tracks-empty" hidden>
+            You are not enrolled in any tracks yet.
+          </p>
+
+          <a
+            id="home-current-tracks-more"
+            class="home-current-tracks-more"
+            href="my-tracks.html"
+            hidden
+          >
+            <span>See More Tracks</span>
+            <span class="explore-icon-chevron" aria-hidden="true"></span>
           </a>
 
-          <a href="track-detail.html?track=positive-thinking-mindfulness" class="track-list-card">
-            <img src="/assets/images/mindfulness.jpg" alt="A dandelion still" class="track-list-img">
-            <div class="track-list-content">
-              <div class="track-list-text">
-                <h4>Positive Thinking & Mindfulness</h4>
-                <p>Continue your journey learning soothing meditation patterns</p>
-              </div>
-              <span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span>
-            </div>
-          </a>
-
-          <a href="#" class="track-list-card">
-            <img src="/assets/images/confidence.jpg" alt="City sky line" class="track-list-img">
-            <div class="track-list-content">
-              <div class="track-list-text">
-                <h4>Confidence & Self-Esteem</h4>
-                <p>Continue your journey learning soothing meditation patterns</p>
-              </div>
-              <span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span>
-            </div>
+          <a class="home-current-tracks-add-btn" href="explore-tracks.html">
+            Add More Tracks
           </a>
 
         </div>
@@ -116,6 +103,7 @@
 
   <div data-include="components/footer.html"></div>
   <script src="scripts/HTMLInclude.min.js"></script>
+  <script src="scripts/tracks-data.js"></script>
   <script src="scripts/default.js"></script>
 </body>
 </html>

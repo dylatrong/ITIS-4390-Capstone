@@ -3629,3 +3629,53 @@ main.page-activity article.activity-sheet {
   gap: var(--space-4);
   text-align: center;
 }
+
+.home-current-tracks-empty {
+  margin: var(--space-4) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs-size);
+}
+
+#home-current-tracks-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.home-current-tracks-more {
+  margin-top: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-brand-secondary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-current-tracks-more:hover,
+.home-current-tracks-more:focus-visible {
+  text-decoration: underline;
+}
+
+.home-current-tracks-add-btn {
+  margin-top: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0 var(--space-4);
+  border-radius: 999px;
+  border: 1px solid var(--color-brand-primary);
+  background-color: var(--color-brand-primary);
+  color: var(--footer-text-inverse);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.home-current-tracks-add-btn:hover,
+.home-current-tracks-add-btn:focus-visible {
+  background-color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+  color: var(--footer-text-inverse);
+}

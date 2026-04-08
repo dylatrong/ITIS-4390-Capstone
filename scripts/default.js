@@ -1,3 +1,91 @@
+var NEWLEAF_DEFAULT_HOME_TRACKS = [
+  "resilience-stress-reduction",
+  "positive-thinking-mindfulness",
+  "confidence-self-esteem",
+];
+
+function getHiddenTracksList() {
+  try {
+    var raw = window.localStorage.getItem("newleaf-hidden-my-tracks");
+    var parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (ignore) {
+    return [];
+  }
+}
+
+function setHiddenTracksList(list) {
+  try {
+    window.localStorage.setItem("newleaf-hidden-my-tracks", JSON.stringify(list));
+  } catch (ignore) {}
+}
+
+function getEnrolledTracks() {
+  var enrolled = [];
+  var hasStoredValue = false;
+  try {
+    var raw = window.localStorage.getItem("newleaf-enrolled-tracks");
+    hasStoredValue = raw !== null;
+    var parsed = raw ? JSON.parse(raw) : null;
+    if (Array.isArray(parsed)) {
+      enrolled = parsed;
+    }
+  } catch (ignore) {}
+
+  if (!hasStoredValue) {
+    enrolled = NEWLEAF_DEFAULT_HOME_TRACKS.slice();
+    try {
+      window.localStorage.setItem(
+        "newleaf-enrolled-tracks",
+        JSON.stringify(enrolled)
+      );
+    } catch (ignore) {}
+  }
+
+  return enrolled.filter(function (slug, i, arr) {
+    return slug && arr.indexOf(slug) === i;
+  });
+}
+
+function setEnrolledTracks(list) {
+  try {
+    window.localStorage.setItem("newleaf-enrolled-tracks", JSON.stringify(list));
+  } catch (ignore) {}
+}
+
+function isTrackEnrolled(slug) {
+  if (!slug) return false;
+  return getEnrolledTracks().indexOf(slug) !== -1;
+}
+
+function setTrackEnrolled(slug, enrolled) {
+  if (!slug) return;
+  var list = getEnrolledTracks();
+  var next = list.slice();
+  var idx = next.indexOf(slug);
+  if (enrolled && idx === -1) next.push(slug);
+  if (!enrolled && idx !== -1) next.splice(idx, 1);
+  setEnrolledTracks(next);
+
+  // Keep hidden-state in sync so "Add Track" immediately makes a track visible again.
+  var hidden = getHiddenTracksList();
+  var hiddenIdx = hidden.indexOf(slug);
+  if (enrolled && hiddenIdx !== -1) {
+    hidden.splice(hiddenIdx, 1);
+    setHiddenTracksList(hidden);
+  }
+
+  try {
+    window.sessionStorage.setItem("newleaf-track-added-" + slug, enrolled ? "1" : "0");
+  } catch (ignore) {}
+}
+
+window.NewLeafTrackState = {
+  getEnrolledTracks: getEnrolledTracks,
+  isTrackEnrolled: isTrackEnrolled,
+  setTrackEnrolled: setTrackEnrolled,
+};
+
 function setupSiteHeader() {
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");
@@ -241,44 +329,6 @@ function setupMyTracksLeaveFlow() {
   var modalCloseEls = document.querySelectorAll("[data-my-track-leave-close]");
   var pendingCard = null;
 
-  function getHiddenTracks() {
-    try {
-      var raw = window.localStorage.getItem("newleaf-hidden-my-tracks");
-      var parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (ignore) {
-      return [];
-    }
-  }
-
-  function setHiddenTracks(list) {
-    try {
-      window.localStorage.setItem(
-        "newleaf-hidden-my-tracks",
-        JSON.stringify(list)
-      );
-    } catch (ignore) {}
-  }
-
-  function setTrackAddedState(slug, added) {
-    if (!slug) return;
-    try {
-      window.sessionStorage.setItem(
-        "newleaf-track-added-" + slug,
-        added ? "1" : "0"
-      );
-    } catch (ignore) {}
-  }
-
-  function isTrackAdded(slug) {
-    if (!slug) return false;
-    try {
-      return window.sessionStorage.getItem("newleaf-track-added-" + slug) === "1";
-    } catch (ignore) {
-      return false;
-    }
-  }
-
   function updateEmptyState() {
     if (!emptyState) return;
     var anyVisible = cards.some(function (card) {
@@ -304,15 +354,14 @@ function setupMyTracksLeaveFlow() {
 
   function applyHiddenTracks(slugToShow) {
     var hiddenSet = {};
-    getHiddenTracks().forEach(function (slug) {
+    getHiddenTracksList().forEach(function (slug) {
       hiddenSet[slug] = true;
     });
 
     cards.forEach(function (card) {
       var slug = card.getAttribute("data-my-track-slug") || "";
       if (!slug) return;
-      var isDefault = card.getAttribute("data-my-track-default") === "true";
-      var shouldBeVisible = isTrackAdded(slug) || isDefault;
+      var shouldBeVisible = isTrackEnrolled(slug);
       if (slugToShow && slug === slugToShow) {
         delete hiddenSet[slug];
         card.hidden = false;
@@ -321,7 +370,7 @@ function setupMyTracksLeaveFlow() {
       card.hidden = !shouldBeVisible || Boolean(hiddenSet[slug]);
     });
 
-    setHiddenTracks(Object.keys(hiddenSet));
+    setHiddenTracksList(Object.keys(hiddenSet));
     updateEmptyState();
   }
 
@@ -329,7 +378,7 @@ function setupMyTracksLeaveFlow() {
   var slugFromQuery = params.get("track");
   if (slugFromQuery) {
     slugFromQuery = String(slugFromQuery).trim().toLowerCase();
-    setTrackAddedState(slugFromQuery, true);
+    setTrackEnrolled(slugFromQuery, true);
   } else {
     slugFromQuery = "";
   }
@@ -372,10 +421,10 @@ function setupMyTracksLeaveFlow() {
       pendingCard.open = false;
       pendingCard.hidden = true;
       if (slug) {
-        var hiddenTracks = getHiddenTracks();
+        var hiddenTracks = getHiddenTracksList();
         if (hiddenTracks.indexOf(slug) === -1) hiddenTracks.push(slug);
-        setHiddenTracks(hiddenTracks);
-        setTrackAddedState(slug, false);
+        setHiddenTracksList(hiddenTracks);
+        setTrackEnrolled(slug, false);
       }
       closeModal();
       updateEmptyState();
@@ -390,11 +439,96 @@ function setupMyTracksLeaveFlow() {
   });
 }
 
+function setupHomeCurrentTracks() {
+  var main = document.querySelector("main.page-home");
+  if (!main || main.dataset.homeTracksInit === "true") return;
+  main.dataset.homeTracksInit = "true";
+
+  var list = document.getElementById("home-current-tracks-list");
+  var empty = document.getElementById("home-current-tracks-empty");
+  var seeMore = document.getElementById("home-current-tracks-more");
+  if (!list || !empty || !seeMore) return;
+
+  var TRACK_CARD_META = {
+    "resilience-stress-reduction": {
+      title: "Resilience & Stress Reduction",
+      href: "track-detail.html?track=resilience-stress-reduction",
+      image: "/assets/images/meditation.jpg",
+      alt: "A man meditating in a grass field",
+      desc: "Continue your journey learning soothing meditation patterns",
+    },
+    "positive-thinking-mindfulness": {
+      title: "Positive Thinking & Mindfulness",
+      href: "track-detail.html?track=positive-thinking-mindfulness",
+      image: "/assets/images/mindfulness.jpg",
+      alt: "A dandelion still",
+      desc: "Continue your journey learning soothing meditation patterns",
+    },
+    "confidence-self-esteem": {
+      title: "Confidence & Self-Esteem",
+      href: "track-detail.html?track=confidence-self-esteem",
+      image: "/assets/images/confidence.jpg",
+      alt: "City sky line",
+      desc: "Continue your journey learning soothing meditation patterns",
+    },
+  };
+
+  var hidden = getHiddenTracksList();
+  var enrolled = getEnrolledTracks().filter(function (slug) {
+    return hidden.indexOf(slug) === -1;
+  });
+
+  var renderable = enrolled.filter(function (slug) {
+    if (TRACK_CARD_META[slug]) return true;
+    return Boolean(window.TRACKS_DATA && window.TRACKS_DATA[slug]);
+  });
+
+  list.innerHTML = "";
+  var visible = renderable.slice(0, 3);
+  visible.forEach(function (slug) {
+    var meta = TRACK_CARD_META[slug];
+    if (!meta) {
+      var trackData = (window.TRACKS_DATA && window.TRACKS_DATA[slug]) || null;
+      if (!trackData) return;
+      meta = {
+        title: trackData.pageTitle || "Track",
+        href: "track-detail.html?track=" + encodeURIComponent(slug),
+        image: trackData.heroImage || "/assets/images/mountain.jpg",
+        alt: trackData.heroImageAlt || "",
+        desc: "Continue your journey with the next activity.",
+      };
+    }
+    var card = document.createElement("a");
+    card.className = "track-list-card";
+    card.href = meta.href;
+    card.innerHTML =
+      '<img src="' +
+      meta.image +
+      '" alt="' +
+      meta.alt +
+      '" class="track-list-img">' +
+      '<div class="track-list-content">' +
+      '<div class="track-list-text"><h4>' +
+      meta.title +
+      "</h4><p>" +
+      meta.desc +
+      '</p></div><span class="explore-icon-chevron" style="width: 2rem; height: 2rem;"></span></div>';
+    list.appendChild(card);
+  });
+
+  empty.hidden = visible.length > 0;
+  var showSeeMore = renderable.length > 3;
+  seeMore.hidden = !showSeeMore;
+  seeMore.setAttribute("aria-hidden", showSeeMore ? "false" : "true");
+  seeMore.style.display = showSeeMore ? "inline-flex" : "none";
+}
+
 function tryInitHeader() {
   setupAccountMenu();
   setupMyTracksAccordions();
   setupMyTracksActivityScroll();
   setupMyTracksLeaveFlow();
+  setupHomeCurrentTracks();
 
   var nav = document.getElementById("primary-nav");
   var toggle = document.querySelector(".nav-toggle");

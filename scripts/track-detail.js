@@ -81,6 +81,7 @@ function setupTrackAddButtons() {
 
   var slug = getTrackSlugFromQuery();
   var storageKey = "newleaf-track-added-" + slug;
+  var trackState = window.NewLeafTrackState || null;
   var modal = document.getElementById("track-add-modal");
   var modalConfirm = document.getElementById("track-add-modal-confirm");
   var modalCloseEls = document.querySelectorAll("[data-track-add-modal-close]");
@@ -133,11 +134,15 @@ function setupTrackAddButtons() {
     });
   }
 
-  try {
-    if (window.sessionStorage.getItem(storageKey) === "1") {
-      applyState(true);
-    }
-  } catch (ignore) {}
+  var isAdded = false;
+  if (trackState && typeof trackState.isTrackEnrolled === "function") {
+    isAdded = trackState.isTrackEnrolled(slug);
+  } else {
+    try {
+      isAdded = window.sessionStorage.getItem(storageKey) === "1";
+    } catch (ignore) {}
+  }
+  if (isAdded) applyState(true);
 
   if (modalCloseEls.length) {
     modalCloseEls.forEach(function (el) {
@@ -166,9 +171,13 @@ function setupTrackAddButtons() {
         return;
       }
       applyState(true);
-      try {
-        window.sessionStorage.setItem(storageKey, "1");
-      } catch (ignore) {}
+      if (trackState && typeof trackState.setTrackEnrolled === "function") {
+        trackState.setTrackEnrolled(slug, true);
+      } else {
+        try {
+          window.sessionStorage.setItem(storageKey, "1");
+        } catch (ignore) {}
+      }
       openModal(btn);
     });
   });
