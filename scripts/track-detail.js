@@ -174,6 +174,68 @@ function setupTrackAddButtons() {
   });
 }
 
+function setupTrackBioModal(track) {
+  var readLink = document.getElementById("track-detail-read-bio");
+  var modal = document.getElementById("track-bio-modal");
+  var closeEls = document.querySelectorAll("[data-track-bio-close]");
+  var avatar = document.getElementById("track-bio-modal-avatar");
+  var nameEl = document.getElementById("track-bio-modal-name");
+  var roleEl = document.getElementById("track-bio-modal-role");
+  var content = document.getElementById("track-bio-modal-content");
+
+  if (!readLink || !modal || !content) return;
+
+  function renderBio() {
+    if (avatar) {
+      avatar.src = track.authorAvatar || "";
+      avatar.alt = track.authorAvatarAlt || "";
+    }
+    if (nameEl) nameEl.textContent = track.authorName || "";
+    if (roleEl) roleEl.textContent = track.authorRole || "";
+
+    content.innerHTML = "";
+    var paragraphs = track.authorBioFullParagraphs || [];
+    if (!paragraphs.length && track.authorBioShort) {
+      paragraphs = [track.authorBioShort];
+    }
+    paragraphs.forEach(function (text) {
+      var p = document.createElement("p");
+      p.className = "track-bio-modal-p";
+      p.textContent = text;
+      content.appendChild(p);
+    });
+  }
+
+  function openModal() {
+    renderBio();
+    modal.hidden = false;
+    document.body.classList.add("track-bio-modal-open");
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.classList.remove("track-bio-modal-open");
+  }
+
+  readLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    openModal();
+  });
+
+  if (closeEls.length) {
+    closeEls.forEach(function (el) {
+      el.addEventListener("click", closeModal);
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !modal.hidden) {
+      event.preventDefault();
+      closeModal();
+    }
+  });
+}
+
 function initTrackDetailPage() {
   var slug = getTrackSlugFromQuery();
   var data = window.TRACKS_DATA || {};
@@ -194,6 +256,7 @@ function initTrackDetailPage() {
 
   renderTrackDetail(track);
   setupTrackAddButtons();
+  setupTrackBioModal(track);
 }
 
 document.addEventListener("DOMContentLoaded", initTrackDetailPage);

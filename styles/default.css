@@ -528,7 +528,7 @@ footer {
 }
 
 .account-menu-close:hover .account-menu-icon--close {
-  background-color: var(--color-brand-secondary-dark);
+  background-color: var(--color-brand-primary);
 }
 
 .account-menu-close:focus-visible,
@@ -2444,6 +2444,136 @@ main.page-track-detail {
   outline-offset: 2px;
 }
 
+.track-bio-modal-open {
+  overflow: hidden;
+}
+
+.track-bio-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+}
+
+.track-bio-modal[hidden] {
+  display: none;
+}
+
+.track-bio-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.82) 0%, rgba(12, 12, 12, 0.72) 100%);
+}
+
+.track-bio-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 41rem);
+  max-height: min(85vh, 42rem);
+  overflow: auto;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-primary);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.1),
+    0 0 12px rgba(0, 0, 0, 0.08);
+  padding: var(--space-6);
+}
+
+.track-bio-modal-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+}
+
+.track-bio-modal-close:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.track-bio-modal-close-icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--account-menu-icon-color);
+  mask-image: url("/assets/icons/close_icon.svg");
+  -webkit-mask-image: url("/assets/icons/close_icon.svg");
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+}
+
+.track-bio-modal-close:hover .track-bio-modal-close-icon {
+  background-color: var(--color-brand-primary);
+}
+
+.track-bio-modal-author-block {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-5);
+}
+
+.track-bio-modal-avatar {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.track-bio-modal-author-meta {
+  min-width: 0;
+}
+
+.track-bio-modal-name {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-lg-size);
+  line-height: var(--text-lg-leading);
+  letter-spacing: -0.0625rem;
+  color: var(--color-text-primary);
+}
+
+.track-bio-modal-role {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-xs-size);
+  line-height: var(--text-xs-leading);
+  color: var(--color-text-secondary);
+}
+
+.track-bio-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.track-bio-modal-p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-xs-size);
+  line-height: var(--text-xs-leading);
+  color: var(--color-text-primary);
+}
+
 .track-detail-columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 2px minmax(0, 24rem);
@@ -2600,6 +2730,15 @@ main.page-track-detail {
   .track-add-modal-text {
     font-size: 2rem;
     line-height: 2.5rem;
+  }
+
+  .track-bio-modal-card {
+    padding: var(--space-5);
+  }
+
+  .track-bio-modal-name {
+    font-size: var(--nav-link-size);
+    line-height: var(--nav-link-line-height);
   }
 }
 

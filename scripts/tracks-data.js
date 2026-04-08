@@ -20,6 +20,11 @@ window.TRACKS_DATA = {
       "For both your body and mind, it's important to take the time to reset after a period of intense work stress. It can help replenish your energy and get you back to feeling like yourself—at work, at home, and in your relationships.",
     ],
     authorDescriptionClosing: "Let's get started.",
+    authorBioFullParagraphs: [
+      "Hi, I am Dr. Saeromi Kim. I am a licensed clinical psychologist who helps people recover from stress, burnout, and major life transitions with practical, evidence-based tools they can use in everyday life.",
+      "At UCLA and in private practice, I work with adults who feel stretched thin by work and caregiving responsibilities. My approach blends cognitive behavioral therapy, mindfulness, and self-compassion so progress feels both realistic and sustainable.",
+      "I created this track because burnout is not a personal failure; it is often a sign that your system has been overworked for too long. My goal is to help you rebuild rest, resilience, and a sense of agency one step at a time.",
+    ],
     helps: [
       "Rest and recover",
       "Feel less stressed and more resilient",

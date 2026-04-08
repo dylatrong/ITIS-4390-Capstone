@@ -61,7 +61,7 @@
                 </div>
               </div>
               <p id="track-detail-author-bio" class="track-detail-author-bio"></p>
-              <a class="track-detail-read-bio" href="#">Read Full Bio</a>
+              <a class="track-detail-read-bio" id="track-detail-read-bio" href="#">Read Full Bio</a>
             </div>
             <div class="track-detail-hero-bar">
               <h1 id="track-detail-title" class="track-detail-hero-bar-title"></h1>
@@ -155,6 +155,43 @@
               Yes! Take me to the track.
             </button>
           </div>
+        </div>
+      </div>
+
+      <div
+        id="track-bio-modal"
+        class="track-bio-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="track-bio-modal-name"
+        hidden
+      >
+        <div class="track-bio-modal-backdrop" data-track-bio-close></div>
+        <div class="track-bio-modal-card">
+          <button
+            type="button"
+            class="track-bio-modal-close"
+            aria-label="Close full bio"
+            data-track-bio-close
+          >
+            <span class="track-bio-modal-close-icon" aria-hidden="true"></span>
+          </button>
+          <div class="track-bio-modal-author-block">
+            <img
+              id="track-bio-modal-avatar"
+              class="track-bio-modal-avatar"
+              src=""
+              alt=""
+              width="60"
+              height="60"
+              decoding="async"
+            >
+            <div class="track-bio-modal-author-meta">
+              <p id="track-bio-modal-name" class="track-bio-modal-name"></p>
+              <p id="track-bio-modal-role" class="track-bio-modal-role"></p>
+            </div>
+          </div>
+          <div id="track-bio-modal-content" class="track-bio-modal-content"></div>
         </div>
       </div>
     </div>
