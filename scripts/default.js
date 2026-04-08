@@ -270,6 +270,15 @@ function setupMyTracksLeaveFlow() {
     } catch (ignore) {}
   }
 
+  function isTrackAdded(slug) {
+    if (!slug) return false;
+    try {
+      return window.sessionStorage.getItem("newleaf-track-added-" + slug) === "1";
+    } catch (ignore) {
+      return false;
+    }
+  }
+
   function updateEmptyState() {
     if (!emptyState) return;
     var anyVisible = cards.some(function (card) {
@@ -302,12 +311,14 @@ function setupMyTracksLeaveFlow() {
     cards.forEach(function (card) {
       var slug = card.getAttribute("data-my-track-slug") || "";
       if (!slug) return;
+      var isDefault = card.getAttribute("data-my-track-default") === "true";
+      var shouldBeVisible = isTrackAdded(slug) || isDefault;
       if (slugToShow && slug === slugToShow) {
         delete hiddenSet[slug];
         card.hidden = false;
         return;
       }
-      card.hidden = Boolean(hiddenSet[slug]);
+      card.hidden = !shouldBeVisible || Boolean(hiddenSet[slug]);
     });
 
     setHiddenTracks(Object.keys(hiddenSet));

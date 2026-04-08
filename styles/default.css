@@ -1846,6 +1846,7 @@ main.page-category {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  align-items: center;
   gap: var(--space-6);
   width: max-content;
   min-height: 0;
