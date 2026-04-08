@@ -238,6 +238,12 @@ function setupMyTracksAccordions() {
     document.querySelectorAll("details.my-track-card")
   );
 
+  function scrollCardIntoView(card) {
+    if (!card) return;
+    var top = card.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  }
+
   cards.forEach(function (el) {
     var cardSlug = el.getAttribute("data-my-track-slug");
     if (slug && cardSlug && cardSlug === slug) {
@@ -251,6 +257,7 @@ function setupMyTracksAccordions() {
       cards.forEach(function (other) {
         if (other !== el) other.open = false;
       });
+      scrollCardIntoView(el);
     });
   });
 }
