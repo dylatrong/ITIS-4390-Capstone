@@ -91,6 +91,42 @@
           </div>
         </article>
       </div>
+
+      <div
+        id="activity-pledge-modal"
+        class="activity-pledge-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="activity-pledge-modal-title"
+        aria-describedby="activity-pledge-modal-text"
+        hidden
+      >
+        <div class="activity-pledge-modal-backdrop" data-activity-pledge-close></div>
+        <div class="activity-pledge-modal-card">
+          <p id="activity-pledge-modal-title" class="activity-pledge-modal-title">
+            Great choice.
+          </p>
+          <p id="activity-pledge-modal-text" class="activity-pledge-modal-text">
+            After you complete this activity in real life, come back here to continue your track progress.
+          </p>
+          <div class="activity-pledge-modal-actions">
+            <button
+              type="button"
+              class="activity-pledge-modal-btn activity-pledge-modal-btn--link"
+              data-activity-pledge-close
+            >
+              Stay Here
+            </button>
+            <button
+              type="button"
+              class="activity-pledge-modal-btn activity-pledge-modal-btn--primary"
+              id="activity-pledge-modal-back"
+            >
+              Go Back to Track
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 

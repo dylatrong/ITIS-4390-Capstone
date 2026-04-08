@@ -45,11 +45,55 @@ function renderActivityPage(activity) {
   if (planNotes) planNotes.value = "";
 
   var pledge = document.getElementById("activity-btn-pledge");
+  var pledgeModal = document.getElementById("activity-pledge-modal");
+  var pledgeModalBack = document.getElementById("activity-pledge-modal-back");
+  var pledgeModalCloseEls = document.querySelectorAll("[data-activity-pledge-close]");
   if (pledge) {
     var href = activity.pledgeHref || activity.backHref || "my-tracks.html";
-    pledge.onclick = function () {
+
+    function goBackToTrack() {
       window.location.href = href;
+    }
+
+    function closePledgeModal() {
+      if (!pledgeModal) return;
+      pledgeModal.hidden = true;
+      document.body.classList.remove("activity-pledge-modal-open");
+    }
+
+    function openPledgeModal() {
+      if (!pledgeModal) {
+        goBackToTrack();
+        return;
+      }
+      pledgeModal.hidden = false;
+      document.body.classList.add("activity-pledge-modal-open");
+      if (pledgeModalBack) pledgeModalBack.focus();
+    }
+
+    pledge.onclick = function () {
+      openPledgeModal();
     };
+
+    if (pledgeModalCloseEls.length) {
+      pledgeModalCloseEls.forEach(function (el) {
+        el.addEventListener("click", closePledgeModal);
+      });
+    }
+
+    if (pledgeModalBack) {
+      pledgeModalBack.onclick = function () {
+        closePledgeModal();
+        goBackToTrack();
+      };
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && pledgeModal && !pledgeModal.hidden) {
+        event.preventDefault();
+        closePledgeModal();
+      }
+    });
   }
 }
 

@@ -3283,6 +3283,103 @@ main.page-activity article.activity-sheet {
   outline-offset: 2px;
 }
 
+.activity-pledge-modal-open {
+  overflow: hidden;
+}
+
+.activity-pledge-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+}
+
+.activity-pledge-modal[hidden] {
+  display: none;
+}
+
+.activity-pledge-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.82) 0%, rgba(12, 12, 12, 0.72) 100%);
+}
+
+.activity-pledge-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 32rem);
+  border-radius: 1.25rem;
+  background-color: var(--color-bg-primary);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.1),
+    0 0 12px rgba(0, 0, 0, 0.08);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.activity-pledge-modal-title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-lg-size);
+  line-height: var(--text-lg-leading);
+  color: var(--color-text-primary);
+}
+
+.activity-pledge-modal-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-xs-size);
+  line-height: var(--text-xs-leading);
+  color: var(--color-text-secondary);
+}
+
+.activity-pledge-modal-actions {
+  margin-top: var(--space-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.activity-pledge-modal-btn {
+  border: 1px solid transparent;
+  border-radius: var(--space-3);
+  padding: var(--space-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--nav-link-size);
+  line-height: var(--nav-link-line-height);
+  cursor: pointer;
+}
+
+.activity-pledge-modal-btn--link {
+  background-color: transparent;
+  color: var(--color-brand-secondary);
+}
+
+.activity-pledge-modal-btn--link:hover {
+  color: var(--color-brand-secondary-hover);
+}
+
+.activity-pledge-modal-btn--primary {
+  background-color: var(--color-brand-primary);
+  color: var(--footer-text-inverse);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 6px rgba(0, 0, 0, 0.08);
+}
+
+.activity-pledge-modal-btn--primary:hover {
+  background-color: var(--color-brand-primary-hover);
+}
+
+.activity-pledge-modal-btn:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
 @media (max-width: 767px) {
   .activity-sheet-title {
     font-size: var(--text-lg-size);
