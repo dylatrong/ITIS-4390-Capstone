@@ -225,13 +225,24 @@ function setupMyTracksAccordions() {
     slug = "";
   }
 
-  document.querySelectorAll("details.my-track-card").forEach(function (el) {
+  var cards = Array.prototype.slice.call(
+    document.querySelectorAll("details.my-track-card")
+  );
+
+  cards.forEach(function (el) {
     var cardSlug = el.getAttribute("data-my-track-slug");
     if (slug && cardSlug && cardSlug === slug) {
       el.open = true;
     } else {
       el.open = false;
     }
+
+    el.addEventListener("toggle", function () {
+      if (!el.open) return;
+      cards.forEach(function (other) {
+        if (other !== el) other.open = false;
+      });
+    });
   });
 }
 
@@ -384,6 +395,19 @@ function setupMyTracksLeaveFlow() {
   }
   applyHiddenTracks(slugFromQuery);
 
+  if (slugFromQuery) {
+    var targetCard = document.querySelector(
+      'details.my-track-card[data-my-track-slug="' + slugFromQuery + '"]'
+    );
+    if (targetCard) {
+      targetCard.open = true;
+      window.requestAnimationFrame(function () {
+        var top = targetCard.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      });
+    }
+  }
+
   document
     .querySelectorAll("[data-my-track-leave-btn]")
     .forEach(function (button) {
@@ -452,21 +476,21 @@ function setupHomeCurrentTracks() {
   var TRACK_CARD_META = {
     "resilience-stress-reduction": {
       title: "Resilience & Stress Reduction",
-      href: "track-detail.html?track=resilience-stress-reduction",
+      href: "my-tracks.html?track=resilience-stress-reduction",
       image: "/assets/images/meditation.jpg",
       alt: "A man meditating in a grass field",
       desc: "Continue your journey learning soothing meditation patterns",
     },
     "positive-thinking-mindfulness": {
       title: "Positive Thinking & Mindfulness",
-      href: "track-detail.html?track=positive-thinking-mindfulness",
+      href: "my-tracks.html?track=positive-thinking-mindfulness",
       image: "/assets/images/mindfulness.jpg",
       alt: "A dandelion still",
       desc: "Continue your journey learning soothing meditation patterns",
     },
     "confidence-self-esteem": {
       title: "Confidence & Self-Esteem",
-      href: "track-detail.html?track=confidence-self-esteem",
+      href: "my-tracks.html?track=confidence-self-esteem",
       image: "/assets/images/confidence.jpg",
       alt: "City sky line",
       desc: "Continue your journey learning soothing meditation patterns",
@@ -492,7 +516,7 @@ function setupHomeCurrentTracks() {
       if (!trackData) return;
       meta = {
         title: trackData.pageTitle || "Track",
-        href: "track-detail.html?track=" + encodeURIComponent(slug),
+        href: "my-tracks.html?track=" + encodeURIComponent(slug),
         image: trackData.heroImage || "/assets/images/mountain.jpg",
         alt: trackData.heroImageAlt || "",
         desc: "Continue your journey with the next activity.",
