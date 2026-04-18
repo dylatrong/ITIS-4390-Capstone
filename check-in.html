@@ -49,13 +49,13 @@
               Take a moment to reflect on how you're feeling today.
             </p>
 
-            <form action="check-in-success.html">
-              <div class="checkin-group">
+            <form id="checkinForm" action="check-in-success.html" novalidate>
+              <div class="checkin-group" id="mood-group">
                 <label class="checkin-label">How are you feeling right now?</label>
 
                 <div class="mood-options">
                   <label class="mood-option">
-                    <input type="radio" name="mood" value="happy" required>
+                    <input type="radio" name="mood" value="happy">
                     <span>😊</span>
                   </label>
 
@@ -69,9 +69,10 @@
                     <span>☹️</span>
                   </label>
                 </div>
+                <small class="checkin-message" id="mood-message"></small>
               </div>
 
-              <div class="checkin-group">
+              <div class="checkin-group" id="energy-group">
                 <label class="checkin-label">Energy Level</label>
 
                 <div class="checkin-row">
@@ -81,7 +82,7 @@
                   </label>
 
                   <label>
-                    <input type="radio" name="energy" value="medium" required>
+                    <input type="radio" name="energy" value="medium">
                     Medium
                   </label>
 
@@ -90,9 +91,10 @@
                     High
                   </label>
                 </div>
+                <small class="checkin-message" id="energy-message"></small>
               </div>
 
-              <div class="checkin-group">
+              <div class="checkin-group" id="factor-group">
                 <label class="checkin-label">What’s affecting your mood today?</label>
 
                 <div class="checkin-row">
@@ -121,16 +123,18 @@
                     Relationships
                   </label>
                 </div>
+                <small class="checkin-message" id="factor-message"></small>
               </div>
 
               <div class="checkin-group">
                 <label class="checkin-label" for="other">Other</label>
-                <input type="text" id="other" name="other" required>
+                <input type="text" id="other" name="other">
               </div>
 
               <div class="checkin-group">
                 <label class="checkin-label" for="reflection">Reflection</label>
-                <textarea id="reflection" name="reflection" rows="5" required></textarea>
+                <textarea id="reflection" name="reflection" rows="5"></textarea>
+                <small class="checkin-message" id="reflection-message"></small>
               </div>
 
               <div class="checkin-button-row">
@@ -147,5 +151,147 @@
 
   <script src="scripts/HTMLInclude.min.js"></script>
   <script src="scripts/default.js"></script>
+
+  <script>
+    const form = document.getElementById("checkinForm");
+
+    const moodInputs = document.querySelectorAll('input[name="mood"]');
+    const energyInputs = document.querySelectorAll('input[name="energy"]');
+    const factorInputs = document.querySelectorAll('input[name="factor"]');
+    const reflectionInput = document.getElementById("reflection");
+
+    const moodGroup = document.getElementById("mood-group");
+    const energyGroup = document.getElementById("energy-group");
+    const factorGroup = document.getElementById("factor-group");
+
+    const moodMessage = document.getElementById("mood-message");
+    const energyMessage = document.getElementById("energy-message");
+    const factorMessage = document.getElementById("factor-message");
+    const reflectionMessage = document.getElementById("reflection-message");
+
+    function showError(field, messageElement, message) {
+      field.classList.remove("input-success");
+      field.classList.add("input-error");
+      messageElement.classList.remove("success-message");
+      messageElement.classList.add("error-message");
+      messageElement.textContent = message;
+    }
+
+    function showSuccess(field, messageElement, message) {
+      field.classList.remove("input-error");
+      field.classList.add("input-success");
+      messageElement.classList.remove("error-message");
+      messageElement.classList.add("success-message");
+      messageElement.textContent = message;
+    }
+
+    function clearMessage(field, messageElement) {
+      field.classList.remove("input-error", "input-success");
+      messageElement.classList.remove("error-message", "success-message");
+      messageElement.textContent = "";
+    }
+
+    function validateMood() {
+      const selectedMood = document.querySelector('input[name="mood"]:checked');
+
+      if (!selectedMood) {
+        showError(
+          moodGroup,
+          moodMessage,
+          "Choose the mood that best fits how you feel right now."
+        );
+        return false;
+      }
+
+      showSuccess(moodGroup, moodMessage, "Mood saved.");
+      return true;
+    }
+
+    function validateEnergy() {
+      const selectedEnergy = document.querySelector('input[name="energy"]:checked');
+
+      if (!selectedEnergy) {
+        showError(
+          energyGroup,
+          energyMessage,
+          "Choose the energy level that feels most accurate today."
+        );
+        return false;
+      }
+
+      showSuccess(energyGroup, energyMessage, "Energy level saved.");
+      return true;
+    }
+
+    function validateFactors() {
+      const selectedFactors = document.querySelectorAll('input[name="factor"]:checked');
+
+      if (selectedFactors.length === 0) {
+        showError(
+          factorGroup,
+          factorMessage,
+          "Pick at least one thing that's affecting your mood today."
+        );
+        return false;
+      }
+
+      showSuccess(factorGroup, factorMessage, "Selected.");
+      return true;
+    }
+
+    function validateReflection() {
+      const value = reflectionInput.value.trim();
+
+      if (value === "") {
+        showError(
+          reflectionInput,
+          reflectionMessage,
+          "Write a few words about how you're feeling or what made today feel that way."
+        );
+        return false;
+      }
+
+      if (value.length < 10) {
+        showError(
+          reflectionInput,
+          reflectionMessage,
+          "Please write at least 10 characters so your reflection has a little more detail."
+        );
+        return false;
+      }
+
+      showSuccess(reflectionInput, reflectionMessage, "Reflection saved.");
+      return true;
+    }
+
+    moodInputs.forEach((input) => {
+      input.addEventListener("change", validateMood);
+      input.addEventListener("blur", validateMood);
+    });
+
+    energyInputs.forEach((input) => {
+      input.addEventListener("change", validateEnergy);
+      input.addEventListener("blur", validateEnergy);
+    });
+
+    factorInputs.forEach((input) => {
+      input.addEventListener("change", validateFactors);
+      input.addEventListener("blur", validateFactors);
+    });
+
+    reflectionInput.addEventListener("input", validateReflection);
+    reflectionInput.addEventListener("blur", validateReflection);
+
+    form.addEventListener("submit", function (event) {
+      const moodValid = validateMood();
+      const energyValid = validateEnergy();
+      const factorsValid = validateFactors();
+      const reflectionValid = validateReflection();
+
+      if (!moodValid || !energyValid || !factorsValid || !reflectionValid) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
