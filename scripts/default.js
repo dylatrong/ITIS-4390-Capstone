@@ -744,3 +744,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   observer.observe(document.body, { childList: true, subtree: true });
 });
+
+// Remove the old DOMContentLoaded block for the theme and replace it with this:
+document.addEventListener('click', function(ev) {
+  // Check if the clicked element (or its parent) is the theme toggle
+  const themeToggleBtn = ev.target.closest('#theme-toggle');
+  
+  if (themeToggleBtn) {
+    // Check the current theme state
+    let currentTheme = document.documentElement.getAttribute('data-theme');
+    
+    // Switch to dark if it's light, or light if it's dark
+    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Apply the new theme
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Save it to localStorage
+    localStorage.setItem('theme', newTheme);
+  }
+});
