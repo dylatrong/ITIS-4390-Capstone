@@ -162,6 +162,11 @@
 
   /* Specific elements */
   --nav-border: #333333;
+
+  .nav-logo-img,
+  .footer-logo-img {
+    content: url("/ITIS-4390-Capstone/assets/icons/NewLeaf-dark.svg");
+  }
 }
 
 /* Update your existing body block to include the transition */
