@@ -132,6 +132,20 @@
 
 }
 
+/* Compact type scale for small/effective viewports (including 200% zoom scenarios). */
+@media (max-width: 1024px) {
+  :root {
+    --text-xs-size: 0.9375rem;
+    --text-xs-leading: 1.375rem;
+    --text-sm-size: 1rem;
+    --text-sm-leading: 1.5rem;
+    --text-lg-size: 1.5rem;
+    --text-lg-leading: 2rem;
+    --nav-link-size: 1rem;
+    --nav-link-line-height: 1.5rem;
+  }
+}
+
 /* Add this right below your existing :root { ... } block */
 
 [data-theme="dark"] {
@@ -708,6 +722,17 @@ footer {
   }
 }
 
+/* Prevent crowded desktop nav text at high zoom / reduced effective width. */
+@media (max-width: 1200px) {
+  .nav-bar {
+    gap: var(--space-4);
+  }
+
+  .nav-links {
+    gap: var(--space-4);
+  }
+}
+
 /* Site footer */
 .site-footer {
   padding-block: 0;
@@ -1060,6 +1085,7 @@ footer {
   color: inherit;
   border-radius: var(--space-2);
   transition: background-color 0.2s ease;
+  overflow-wrap: anywhere;
 }
 
 .explore-search-result:hover {
@@ -1082,8 +1108,9 @@ footer {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-1);
-  flex-shrink: 0;
+  flex-shrink: 1;
   font-family: var(--font-body);
   font-weight: 400;
   font-size: var(--text-xs-size);
@@ -1238,9 +1265,8 @@ footer {
   line-height: var(--text-sm-leading);
   letter-spacing: -0.03125rem;
   color: var(--color-text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .explore-category-card-meta {
@@ -1251,9 +1277,8 @@ footer {
   font-size: var(--text-xs-size);
   line-height: var(--text-xs-leading);
   color: var(--color-text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 @media (min-width: 768px) {
@@ -1381,8 +1406,8 @@ main.page-category {
   margin: 0;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 2.5rem;
-  line-height: 3rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: clamp(2.25rem, 4.5vw, 3rem);
   letter-spacing: -0.0625rem;
   color: var(--footer-text-inverse);
 }
@@ -1453,6 +1478,7 @@ main.page-category {
   line-height: var(--nav-link-line-height);
   letter-spacing: -0.03125rem;
   color: var(--color-text-primary);
+  overflow-wrap: anywhere;
 }
 
 .category-track-card-list {
