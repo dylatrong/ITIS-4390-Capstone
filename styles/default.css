@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap");
 
 :root {
+  /* Global UI scale (visual "zoom out" without layout hacks) */
+  --ui-scale: 0.88;
+
   /* Typography */
   --font-heading: "Merriweather", Georgia, "Times New Roman", serif;
   --font-body: "Open Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -80,7 +83,7 @@
   --text-lg-leading: 2rem;
 
   /* Layout constraints */
-  --page-padding-inline: 1.25rem;
+  --page-padding-inline: 3.5rem;
   --content-max-width: 68rem; /* 1088px */
 
   /* Nav */
@@ -95,8 +98,12 @@
   --nav-link-size: 1rem; /* 16px */
   --nav-link-line-height: 1.5rem; /* 24px */
   --nav-link-gap-desktop: 5.625rem; /* 90px */
-  --nav-bar-padding-inline-desktop: var(--space-6);
+  --nav-bar-padding-inline-desktop: var(--space-7);
   --nav-bar-padding-inline-mobile: var(--space-3);
+  --nav-logo-height-desktop: 2.5rem;
+  --nav-logo-height-mobile: 2.125rem;
+  --nav-account-hit-size: 1.75rem;
+  --nav-account-icon-size: 1.5rem;
   /* Nav icons (mask) */
   --nav-icon-color: var(--color-text-primary);
   --nav-icon-hover-color: var(--color-brand-secondary);
@@ -135,13 +142,10 @@
 /* Compact type scale for small/effective viewports (including 200% zoom scenarios). */
 @media (max-width: 1024px) {
   :root {
-    --text-xs-size: 0.875rem;
+    --ui-scale: 0.82;
     --text-xs-leading: 1.25rem;
-    --text-sm-size: 0.9375rem;
     --text-sm-leading: 1.375rem;
-    --text-lg-size: 1.375rem;
     --text-lg-leading: 1.875rem;
-    --nav-link-size: 0.9375rem;
     --nav-link-line-height: 1.375rem;
   }
 }
@@ -187,6 +191,10 @@
 }
 
 
+
+html {
+  font-size: calc(16px * var(--ui-scale));
+}
 
 html,
 body {
@@ -280,7 +288,7 @@ footer {
 
 @media (min-width: 1280px) {
   :root {
-    --page-padding-inline: 3rem;
+    --page-padding-inline: 6.5rem;
   }
 }
 
@@ -368,7 +376,7 @@ footer {
 .nav-logo-img {
   display: block;
   width: auto;
-  height: 3.375rem; /* ~54px from Figma */
+  height: var(--nav-logo-height-desktop);
   max-width: 10.5625rem; /* ~169px */
   object-fit: contain;
 }
@@ -418,8 +426,8 @@ footer {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
+  width: var(--nav-account-hit-size);
+  height: var(--nav-account-hit-size);
   margin: 0;
   padding: 0;
   border: 0;
@@ -436,8 +444,8 @@ footer {
 
 .nav-account-icon {
   display: block;
-  width: 2rem;
-  height: 2rem;
+  width: var(--nav-account-icon-size);
+  height: var(--nav-account-icon-size);
   flex-shrink: 0;
   background-color: var(--nav-icon-color);
   mask-image: url("/assets/icons/account_icon.svg");
@@ -742,7 +750,7 @@ footer {
   }
 
   .nav-logo-img {
-    height: 2.75rem;
+    height: var(--nav-logo-height-mobile);
     max-width: 9rem;
   }
 
