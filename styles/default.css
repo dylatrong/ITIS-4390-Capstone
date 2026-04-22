@@ -55,6 +55,16 @@
   --color-disabled-bg: #e5eaee;
   --color-disabled-text: #5d666c;
   --color-disabled-border: #aeb8bf;
+  --color-success-strong: #026600;
+  --color-brand-primary-soft: #fff1ec;
+  --color-chart-surface: var(--color-surface);
+  --color-overlay-strong: rgba(12, 12, 12, 0.82);
+  --color-overlay-soft: rgba(12, 12, 12, 0.72);
+  --color-brand-primary-ring: rgba(240, 101, 67, 0.15);
+  --color-home-greeting: #0c0c0c;
+  --color-home-greeting-shadow-top: rgba(255, 255, 255, 0.9);
+  --color-home-greeting-shadow-glow: rgba(255, 255, 255, 0.55);
+  --color-home-greeting-shadow-bottom: rgba(12, 12, 12, 0.22);
 
   /* Shadows for elevated surfaces (cards, modals, dropdowns) */
   --shadow-sm: 0 2px 6px rgba(12, 12, 12, 0.12);
@@ -166,6 +176,12 @@
   --color-disabled-bg: #263136;
   --color-disabled-text: #93a3a8;
   --color-disabled-border: #3b4b50;
+  --color-success-strong: #92d89c;
+  --color-brand-primary-soft: #3a2420;
+  --color-chart-surface: #ffffff;
+  --color-overlay-strong: rgba(0, 0, 0, 0.84);
+  --color-overlay-soft: rgba(0, 0, 0, 0.74);
+  --color-brand-primary-ring: rgba(240, 101, 67, 0.28);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
   --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
@@ -2579,7 +2595,7 @@ main.page-track-detail {
 .track-add-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(12, 12, 12, 0.82) 0%, rgba(12, 12, 12, 0.72) 100%);
+  background: linear-gradient(180deg, var(--color-overlay-strong) 0%, var(--color-overlay-soft) 100%);
 }
 
 .track-add-modal-card {
@@ -2602,7 +2618,7 @@ main.page-track-detail {
   font-size: 1.25rem;
   line-height: 1.75rem;
   letter-spacing: -0.03125rem;
-  color: #026600;
+  color: var(--color-success-strong);
 }
 
 .track-add-modal-text {
@@ -3061,7 +3077,7 @@ main.page-track-detail {
   width: 100%;
   border-radius: var(--space-2);
   margin-bottom: var(--space-4);
-  background-color: white;
+  background-color: var(--color-chart-surface);
   padding: var(--space-2);
 }
 
@@ -3694,8 +3710,8 @@ main.page-activity article.activity-sheet {
 
 .mood-option input:checked + span {
   border-color: var(--color-brand-primary);
-  background-color: #fff1ec;
-  box-shadow: 0 0 0 3px rgba(240, 101, 67, 0.15);
+  background-color: var(--color-brand-primary-soft);
+  box-shadow: 0 0 0 3px var(--color-brand-primary-ring);
   transform: scale(1.04);
 }
 
@@ -3880,19 +3896,19 @@ main.page-activity article.activity-sheet {
 
 /* Keep homepage hero greeting legible over the photo in both themes. */
 .home-greeting {
-  color: #0c0c0c;
+  color: var(--color-home-greeting);
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9),
-    0 0 10px rgba(255, 255, 255, 0.55),
-    0 1px 2px rgba(12, 12, 12, 0.22);
+    0 1px 0 var(--color-home-greeting-shadow-top),
+    0 0 10px var(--color-home-greeting-shadow-glow),
+    0 1px 2px var(--color-home-greeting-shadow-bottom);
 }
 
 :root[data-theme="dark"] .home-greeting {
-  color: #0c0c0c;
+  color: var(--color-home-greeting);
   text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9),
-    0 0 10px rgba(255, 255, 255, 0.55),
-    0 1px 2px rgba(12, 12, 12, 0.22);
+    0 1px 0 var(--color-home-greeting-shadow-top),
+    0 0 10px var(--color-home-greeting-shadow-glow),
+    0 1px 2px var(--color-home-greeting-shadow-bottom);
 }
 
 
@@ -3933,7 +3949,7 @@ main.page-activity article.activity-sheet {
 #energy-group.input-error,
 #factor-group.input-error {
   border: 1px solid var(--color-brand-primary);
-  background-color: #fff1ec;
+  background-color: var(--color-brand-primary-soft);
 }
 
 #mood-group.input-success,
