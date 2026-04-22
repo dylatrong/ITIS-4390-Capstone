@@ -9,12 +9,9 @@
   <title>NewLeaf — Work &amp; Money</title>
   <script>
     (function() {
-      var savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
+      var savedTheme = localStorage.getItem('newleaf-theme');
+      var theme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 </head>

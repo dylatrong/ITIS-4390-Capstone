@@ -7,17 +7,17 @@
 
   /* Content colors */
   --color-text-primary: #0c0c0c;
-  --color-text-secondary: #323232;
-  --color-text-tertiary: #6a6a6a;
+  --color-text-secondary: #262626;
+  --color-text-tertiary: #525252;
 
   /* Background + surface */
   --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f8f8;
+  --color-bg-secondary: #f1f3f5;
   --color-surface: #ffffff;
 
   /* Borders */
   --color-border-primary: #656565;
-  --color-border-subtle: #dddddd;
+  --color-border-subtle: #b8c1c7;
 
   /* Brand */
   --color-brand-primary: #f06543;
@@ -49,14 +49,14 @@
 
   /* Focus + disabled states */
   --color-focus-ring: #8aaeb2;
-  --color-disabled-bg: #f0f0f0;
-  --color-disabled-text: #8b8b8b;
-  --color-disabled-border: #c9c9c9;
+  --color-disabled-bg: #e5eaee;
+  --color-disabled-text: #626d73;
+  --color-disabled-border: #aeb8bf;
 
   /* Shadows for elevated surfaces (cards, modals, dropdowns) */
-  --shadow-sm: 0 1px 2px rgba(12, 12, 12, 0.08);
-  --shadow-md: 0 6px 16px rgba(12, 12, 12, 0.12);
-  --shadow-track-btn: 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 6px rgba(12, 12, 12, 0.12);
+  --shadow-md: 0 10px 24px rgba(12, 12, 12, 0.18);
+  --shadow-track-btn: 0 12px 24px rgba(0, 0, 0, 0.16), 0 0 10px rgba(0, 0, 0, 0.1);
 
   /* Spacing scale */
   --space-1: 0.25rem; /* 4px */
@@ -72,28 +72,28 @@
   --radius-lg: 1.25rem;
 
   /* Typography scale — pair by tier (xs = caption/small UI, sm = compact headings). */
-  --text-xs-size: 1rem;
-  --text-xs-leading: var(--space-5);
-  --text-sm-size: 1.125rem;
-  --text-sm-leading: var(--space-5);
-  --text-lg-size: 1.75rem;
-  --text-lg-leading: 2.25rem;
+  --text-xs-size: 0.9375rem;
+  --text-xs-leading: 1.375rem;
+  --text-sm-size: 1rem;
+  --text-sm-leading: 1.5rem;
+  --text-lg-size: 1.5rem;
+  --text-lg-leading: 2rem;
 
   /* Layout constraints */
-  --page-padding-inline: 1rem;
-  --content-max-width: 75rem; /* 1200px */
+  --page-padding-inline: 1.25rem;
+  --content-max-width: 68rem; /* 1088px */
 
   /* Nav */
   --nav-bg: var(--color-bg-primary);
   --nav-border: #5d5d5e;
-  --shadow-nav: 0 16px 32px rgba(0, 0, 0, 0.1), 0 0 12px rgba(0, 0, 0, 0.08);
+  --shadow-nav: 0 16px 32px rgba(0, 0, 0, 0.14), 0 0 12px rgba(0, 0, 0, 0.1);
   --nav-height-desktop: 4rem; /* 64px */
   --nav-height-mobile: 3.5rem;
   /* Full-width drawers sit below sticky header (nav min-height + header bottom border) */
   --account-menu-top-offset: calc(var(--nav-height-desktop) + 1px);
   --nav-link-font: var(--font-body);
-  --nav-link-size: 1.25rem; /* 20px */
-  --nav-link-line-height: 1.75rem; /* 28px */
+  --nav-link-size: 1rem; /* 16px */
+  --nav-link-line-height: 1.5rem; /* 24px */
   --nav-link-gap-desktop: 5.625rem; /* 90px */
   --nav-bar-padding-inline-desktop: var(--space-6);
   --nav-bar-padding-inline-mobile: var(--space-3);
@@ -135,65 +135,55 @@
 /* Compact type scale for small/effective viewports (including 200% zoom scenarios). */
 @media (max-width: 1024px) {
   :root {
-    --text-xs-size: 0.9375rem;
-    --text-xs-leading: 1.375rem;
-    --text-sm-size: 1rem;
-    --text-sm-leading: 1.5rem;
-    --text-lg-size: 1.5rem;
-    --text-lg-leading: 2rem;
-    --nav-link-size: 1rem;
-    --nav-link-line-height: 1.5rem;
+    --text-xs-size: 0.875rem;
+    --text-xs-leading: 1.25rem;
+    --text-sm-size: 0.9375rem;
+    --text-sm-leading: 1.375rem;
+    --text-lg-size: 1.375rem;
+    --text-lg-leading: 1.875rem;
+    --nav-link-size: 0.9375rem;
+    --nav-link-line-height: 1.375rem;
   }
 }
 
-/* Add this right below your existing :root { ... } block */
+:root[data-theme="dark"] {
+  --color-text-primary: #f1f4f5;
+  --color-text-secondary: #ccd5d8;
+  --color-text-tertiary: #a8b5b9;
 
-[data-theme="dark"] {
-  /* Content colors */
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #d4d4d4;
-  --color-text-tertiary: #a3a3a3;
+  --color-bg-primary: #12181a;
+  --color-bg-secondary: #1b2326;
+  --color-surface: #162022;
 
-  /* Background + surface */
-  --color-bg-primary: #121212;
-  --color-bg-secondary: #1e1e1e;
-  --color-surface: #1e1e1e;
+  --color-border-primary: #8fa0a6;
+  --color-border-subtle: #334247;
 
-  /* Borders */
-  --color-border-primary: #888888;
-  --color-border-subtle: #333333;
+  --color-focus-ring: #9cc4cb;
+  --color-disabled-bg: #263136;
+  --color-disabled-text: #93a3a8;
+  --color-disabled-border: #3b4b50;
 
-  /* Focus + disabled states */
-  --color-disabled-bg: #2a2a2a;
-  --color-disabled-text: #777777;
-  --color-disabled-border: #444444;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
+  --shadow-track-btn: 0 10px 20px rgba(0, 0, 0, 0.38), 0 0 8px rgba(0, 0, 0, 0.28);
+  --shadow-nav: 0 16px 32px rgba(0, 0, 0, 0.42), 0 0 12px rgba(0, 0, 0, 0.3);
 
-  /* Shadows (darker shadows blend better on dark backgrounds) */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.5);
-  --shadow-track-btn: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.3);
-  --shadow-nav: 0 16px 32px rgba(0, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.3);
+  --nav-bg: var(--color-bg-primary);
+  --nav-border: #3b4a4f;
+  --account-menu-icon-color: var(--color-text-primary);
+  --nav-icon-color: var(--color-text-primary);
+  --nav-icon-hover-color: var(--color-brand-secondary-light);
 
-  /* Specific elements */
-  --nav-border: #333333;
-
-  .nav-logo-img,
-  .footer-logo-img {
-    content: url("/ITIS-4390-Capstone/assets/icons/NewLeaf-dark.svg");
-  }
+  --footer-bg: #c24e33;
+  --footer-text-inverse: var(--color-text-primary);
+  --footer-nav-link-hover: var(--color-brand-secondary-light);
+  --footer-nav-link-active: var(--color-brand-secondary);
+  --footer-icon-color: var(--color-text-primary);
+  --footer-icon-hover-color: var(--color-brand-secondary-light);
 }
 
-/* Update your existing body block to include the transition */
-body {
-  font-family: var(--font-body);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  /* Add this line: */
-  transition: background-color 0.3s ease, color 0.3s ease; 
+:root[data-theme="dark"] .nav-logo-img {
+  content: url("/assets/icons/NewLeaf-dark.svg");
 }
 
 
@@ -218,6 +208,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 main {
@@ -273,7 +264,7 @@ footer {
 
 @media (min-width: 768px) {
   :root {
-    --page-padding-inline: 1.5rem;
+    --page-padding-inline: 2rem;
   }
 
   main,
@@ -289,7 +280,7 @@ footer {
 
 @media (min-width: 1280px) {
   :root {
-    --page-padding-inline: 2rem;
+    --page-padding-inline: 3rem;
   }
 }
 
@@ -598,7 +589,8 @@ footer {
 }
 
 .account-menu-close:focus-visible,
-.account-menu-item:focus-visible {
+.account-menu-item:focus-visible,
+.account-menu-theme-toggle:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
 }
@@ -607,8 +599,6 @@ footer {
   margin-inline: calc(-1 * var(--space-2));
   padding-block: var(--space-5);
   padding-inline: var(--space-2);
-  border-top: 2px solid var(--color-text-primary);
-  border-bottom: 2px solid var(--color-text-primary);
   display: flex;
   flex-direction: column;
   gap: var(--account-menu-item-gap);
@@ -652,6 +642,69 @@ footer {
 
 .account-menu-item:hover .account-menu-chevron {
   background-color: var(--color-brand-secondary-dark);
+}
+
+.account-menu-section--theme {
+  margin-inline: calc(-1 * var(--space-2));
+  padding-block-start: var(--space-5);
+  padding-inline: var(--space-2);
+  border-top: 2px solid var(--color-text-primary);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.account-menu-theme-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--account-menu-item-size);
+  line-height: var(--account-menu-item-line-height);
+  letter-spacing: -0.0625rem;
+  color: var(--color-text-primary);
+}
+
+.account-menu-theme-toggle {
+  --track-bg: var(--color-bg-primary);
+  --track-border: var(--color-text-primary);
+  --thumb-bg: var(--color-text-primary);
+  --thumb-offset: 0.125rem;
+  --thumb-size: 1.5rem;
+
+  position: relative;
+  width: 3.5rem;
+  height: 1.875rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--track-border);
+  border-radius: 999px;
+  background-color: var(--track-bg);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.account-menu-theme-toggle-thumb {
+  position: absolute;
+  top: 50%;
+  left: var(--thumb-offset);
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-radius: 50%;
+  background-color: var(--thumb-bg);
+  transform: translateY(-50%);
+  transition: left 0.2s ease, background-color 0.2s ease;
+}
+
+.account-menu-theme-toggle[aria-pressed="true"] .account-menu-theme-toggle-thumb {
+  left: calc(100% - var(--thumb-size) - var(--thumb-offset));
+}
+
+:root[data-theme="dark"] .account-menu-theme-toggle {
+  --track-bg: var(--color-bg-secondary);
+  --track-border: var(--color-text-primary);
+  --thumb-bg: var(--color-text-primary);
 }
 
 /* Mobile: hamburger + drawer */
@@ -3800,6 +3853,23 @@ main.page-activity article.activity-sheet {
 .page-home .explore-search {
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-5);
+}
+
+/* Keep homepage hero greeting legible over the photo in both themes. */
+.home-greeting {
+  color: #0c0c0c;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(255, 255, 255, 0.55),
+    0 1px 2px rgba(12, 12, 12, 0.22);
+}
+
+:root[data-theme="dark"] .home-greeting {
+  color: #0c0c0c;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(255, 255, 255, 0.55),
+    0 1px 2px rgba(12, 12, 12, 0.22);
 }
 
 

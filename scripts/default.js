@@ -4,6 +4,26 @@ var NEWLEAF_DEFAULT_HOME_TRACKS = [
   "confidence-self-esteem",
 ];
 
+var NEWLEAF_THEME_STORAGE_KEY = "newleaf-theme";
+
+function getSavedTheme() {
+  try {
+    var saved = window.localStorage.getItem(NEWLEAF_THEME_STORAGE_KEY);
+    return saved === "dark" || saved === "light" ? saved : "";
+  } catch (ignore) {
+    return "";
+  }
+}
+
+function applyTheme(theme) {
+  var nextTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", nextTheme);
+  return nextTheme;
+}
+
+// Apply theme as early as possible to avoid flash and default to light mode.
+applyTheme(getSavedTheme() || "light");
+
 // Reads slugs the user manually hid on My Tracks.
 function getHiddenTracksList() {
   try {
@@ -217,6 +237,35 @@ function setupAccountMenu() {
       closeAccount();
       trigger.focus();
     }
+  });
+}
+
+// Keeps dark-mode state synced between HTML data-theme and account-menu toggle.
+function setupThemeToggle() {
+  var toggle = document.getElementById("theme-toggle");
+  if (!toggle || toggle.dataset.themeInit === "true") return;
+  toggle.dataset.themeInit = "true";
+
+  function syncToggle(theme) {
+    var isDark = theme === "dark";
+    toggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+    toggle.setAttribute(
+      "aria-label",
+      isDark ? "Switch to light mode" : "Enable dark mode"
+    );
+  }
+
+  var initialTheme = applyTheme(getSavedTheme() || "light");
+  syncToggle(initialTheme);
+
+  toggle.addEventListener("click", function () {
+    var current = document.documentElement.getAttribute("data-theme");
+    var next = current === "dark" ? "light" : "dark";
+    next = applyTheme(next);
+    syncToggle(next);
+    try {
+      window.localStorage.setItem(NEWLEAF_THEME_STORAGE_KEY, next);
+    } catch (ignore) {}
   });
 }
 
@@ -711,6 +760,7 @@ function setupSearchSuggestions() {
 // Runs page-level setup safely on whichever page is loaded.
 function tryInitHeader() {
   setupAccountMenu();
+  setupThemeToggle();
   setupMyTracksAccordions();
   setupMyTracksActivityScroll();
   setupMyTracksLeaveFlow();
@@ -743,24 +793,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   observer.observe(document.body, { childList: true, subtree: true });
-});
-
-// Remove the old DOMContentLoaded block for the theme and replace it with this:
-document.addEventListener('click', function(ev) {
-  // Check if the clicked element (or its parent) is the theme toggle
-  const themeToggleBtn = ev.target.closest('#theme-toggle');
-  
-  if (themeToggleBtn) {
-    // Check the current theme state
-    let currentTheme = document.documentElement.getAttribute('data-theme');
-    
-    // Switch to dark if it's light, or light if it's dark
-    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Apply the new theme
-    document.documentElement.setAttribute('data-theme', newTheme);
-    
-    // Save it to localStorage
-    localStorage.setItem('theme', newTheme);
-  }
 });

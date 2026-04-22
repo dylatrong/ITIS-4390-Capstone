@@ -48,10 +48,6 @@
     tabindex="-1"
   ></div>
 
-<button id="theme-toggle" class="nav-account" aria-label="Toggle Dark Mode" style="margin-right: 1rem;">
-  🌓
-</button>
-
   <div
     id="account-menu"
     class="account-menu"
@@ -96,6 +92,19 @@
           Information
           <span class="account-menu-chevron" aria-hidden="true"></span>
         </a>
+      </div>
+
+      <div class="account-menu-section account-menu-section--theme">
+        <span class="account-menu-theme-label">Dark Mode</span>
+        <button
+          type="button"
+          id="theme-toggle"
+          class="account-menu-theme-toggle"
+          aria-pressed="false"
+          aria-label="Enable dark mode"
+        >
+          <span class="account-menu-theme-toggle-thumb" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </div>

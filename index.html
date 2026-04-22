@@ -12,13 +12,9 @@
   
   <script>
     (function() {
-      var savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        // Optional: Automatically use dark mode if the user's OS is set to dark
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
+      var savedTheme = localStorage.getItem('newleaf-theme');
+      var theme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
