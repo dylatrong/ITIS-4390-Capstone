@@ -203,7 +203,7 @@
 }
 
 :root[data-theme="dark"] .nav-logo-img {
-  content: url("/assets/icons/NewLeaf-dark.svg");
+  content: url("../assets/icons/NewLeaf-dark.svg");
 }
 
 
@@ -367,8 +367,8 @@ footer {
   height: 2rem;
   flex-shrink: 0;
   background-color: var(--nav-icon-color);
-  mask-image: url("/assets/icons/hamburger_icon.svg");
-  -webkit-mask-image: url("/assets/icons/hamburger_icon.svg");
+  mask-image: url("../assets/icons/hamburger_icon.svg");
+  -webkit-mask-image: url("../assets/icons/hamburger_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -464,8 +464,8 @@ footer {
   height: var(--nav-account-icon-size);
   flex-shrink: 0;
   background-color: var(--nav-icon-color);
-  mask-image: url("/assets/icons/account_icon.svg");
-  -webkit-mask-image: url("/assets/icons/account_icon.svg");
+  mask-image: url("../assets/icons/account_icon.svg");
+  -webkit-mask-image: url("../assets/icons/account_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -598,8 +598,8 @@ footer {
   width: 2rem;
   height: 2rem;
   background-color: var(--account-menu-icon-color);
-  mask-image: url("/assets/icons/close_icon.svg");
-  -webkit-mask-image: url("/assets/icons/close_icon.svg");
+  mask-image: url("../assets/icons/close_icon.svg");
+  -webkit-mask-image: url("../assets/icons/close_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -654,8 +654,8 @@ footer {
   height: 2rem;
   flex-shrink: 0;
   background-color: var(--account-menu-icon-color);
-  mask-image: url("/assets/icons/right_icon.svg");
-  -webkit-mask-image: url("/assets/icons/right_icon.svg");
+  mask-image: url("../assets/icons/right_icon.svg");
+  -webkit-mask-image: url("../assets/icons/right_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -946,28 +946,28 @@ footer {
 }
 
 .footer-social-icon--email {
-  mask-image: url("/assets/icons/email_icon.svg");
-  -webkit-mask-image: url("/assets/icons/email_icon.svg");
+  mask-image: url("../assets/icons/email_icon.svg");
+  -webkit-mask-image: url("../assets/icons/email_icon.svg");
 }
 
 .footer-social-icon--facebook {
-  mask-image: url("/assets/icons/facebook_icon.svg");
-  -webkit-mask-image: url("/assets/icons/facebook_icon.svg");
+  mask-image: url("../assets/icons/facebook_icon.svg");
+  -webkit-mask-image: url("../assets/icons/facebook_icon.svg");
 }
 
 .footer-social-icon--linkedin {
-  mask-image: url("/assets/icons/linkedin_icon.svg");
-  -webkit-mask-image: url("/assets/icons/linkedin_icon.svg");
+  mask-image: url("../assets/icons/linkedin_icon.svg");
+  -webkit-mask-image: url("../assets/icons/linkedin_icon.svg");
 }
 
 .footer-social-icon--instagram {
-  mask-image: url("/assets/icons/insta_icon.svg");
-  -webkit-mask-image: url("/assets/icons/insta_icon.svg");
+  mask-image: url("../assets/icons/insta_icon.svg");
+  -webkit-mask-image: url("../assets/icons/insta_icon.svg");
 }
 
 .footer-social-icon--twitter {
-  mask-image: url("/assets/icons/twitter_icon.svg");
-  -webkit-mask-image: url("/assets/icons/twitter_icon.svg");
+  mask-image: url("../assets/icons/twitter_icon.svg");
+  -webkit-mask-image: url("../assets/icons/twitter_icon.svg");
 }
 
 .footer-social-link:hover .footer-social-icon {
@@ -1101,8 +1101,8 @@ footer {
   height: var(--space-6);
   flex-shrink: 0;
   background-color: var(--color-text-primary);
-  mask-image: url("/assets/icons/search.svg");
-  -webkit-mask-image: url("/assets/icons/search.svg");
+  mask-image: url("../assets/icons/search.svg");
+  -webkit-mask-image: url("../assets/icons/search.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -1224,8 +1224,8 @@ footer {
   height: var(--space-6);
   flex-shrink: 0;
   background-color: var(--color-disabled-text);
-  mask-image: url("/assets/icons/right_icon.svg");
-  -webkit-mask-image: url("/assets/icons/right_icon.svg");
+  mask-image: url("../assets/icons/right_icon.svg");
+  -webkit-mask-image: url("../assets/icons/right_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -1480,8 +1480,8 @@ main.page-category {
   height: var(--space-6);
   flex-shrink: 0;
   background-color: var(--footer-text-inverse);
-  mask-image: url("/assets/icons/left_icon.svg");
-  -webkit-mask-image: url("/assets/icons/left_icon.svg");
+  mask-image: url("../assets/icons/left_icon.svg");
+  -webkit-mask-image: url("../assets/icons/left_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -1812,8 +1812,8 @@ main.page-category {
   height: var(--space-6);
   flex-shrink: 0;
   background-color: var(--color-text-primary);
-  mask-image: url("/assets/icons/down_icon.svg");
-  -webkit-mask-image: url("/assets/icons/down_icon.svg");
+  mask-image: url("../assets/icons/down_icon.svg");
+  -webkit-mask-image: url("../assets/icons/down_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -2154,8 +2154,8 @@ main.page-category {
   height: var(--space-6);
   transform: translateY(-50%);
   background-color: var(--color-text-primary);
-  mask-image: url("/assets/icons/right_icon.svg");
-  -webkit-mask-image: url("/assets/icons/right_icon.svg");
+  mask-image: url("../assets/icons/right_icon.svg");
+  -webkit-mask-image: url("../assets/icons/right_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -2304,8 +2304,8 @@ main.page-track-detail {
   height: var(--space-6);
   flex-shrink: 0;
   background-color: var(--color-text-primary);
-  mask-image: url("/assets/icons/left_icon.svg");
-  -webkit-mask-image: url("/assets/icons/left_icon.svg");
+  mask-image: url("../assets/icons/left_icon.svg");
+  -webkit-mask-image: url("../assets/icons/left_icon.svg");
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -2741,8 +2741,8 @@ main.page-track-detail {
   width: 2rem;
   height: 2rem;
   background-color: var(--account-menu-icon-color);
-  mask-image: url("/assets/icons/close_icon.svg");
-  -webkit-mask-image: url("/assets/icons/close_icon.svg");
+  mask-image: url("../assets/icons/close_icon.svg");
+  -webkit-mask-image: url("../assets/icons/close_icon.svg");
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
   mask-position: center;
@@ -2987,7 +2987,7 @@ main.page-track-detail {
   left: 0;
   right: 0;
   height: 35rem;
-  background-image: url("/assets/images/mountain.jpg");
+  background-image: url("../assets/images/mountain.jpg");
   background-size: cover;
   background-position: center top;
   z-index: 0;
@@ -3313,13 +3313,13 @@ main.page-activity article.activity-sheet {
 }
 
 .activity-rail-icon--coffee {
-  mask-image: url("/assets/icons/coffee_icon.svg");
-  -webkit-mask-image: url("/assets/icons/coffee_icon.svg");
+  mask-image: url("../assets/icons/coffee_icon.svg");
+  -webkit-mask-image: url("../assets/icons/coffee_icon.svg");
 }
 
 .activity-rail-icon--list {
-  mask-image: url("/assets/icons/list_icon.svg");
-  -webkit-mask-image: url("/assets/icons/list_icon.svg");
+  mask-image: url("../assets/icons/list_icon.svg");
+  -webkit-mask-image: url("../assets/icons/list_icon.svg");
 }
 
 .activity-section-label {

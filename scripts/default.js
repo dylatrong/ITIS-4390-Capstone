@@ -585,7 +585,7 @@ function setupHomeCurrentTracks() {
       meta = {
         title: trackData.pageTitle || "Track",
         href: "my-tracks.html?track=" + encodeURIComponent(slug),
-        image: trackData.heroImage || "/assets/images/mountain.jpg",
+        image: trackData.heroImage || "../assets/images/mountain.jpg",
         alt: trackData.heroImageAlt || "",
         desc: "Continue your journey with the next activity.",
       };
